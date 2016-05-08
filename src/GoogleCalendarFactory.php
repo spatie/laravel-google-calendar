@@ -2,11 +2,12 @@
 
 namespace Spatie\GoogleCalendar;
 
+use Google_Client;
 use Google_Service_Calendar;
 
 class GoogleCalendarFactory
 {
-    public static function createForCalendarId() : GoogleCalendar
+    public static function createForCalendarId($calendarId) : GoogleCalendar
     {
         $config = config('laravel-google-calendar');
 
@@ -18,6 +19,6 @@ class GoogleCalendarFactory
 
         $service = new Google_Service_Calendar($client);
 
-        return new GoogleCalendar($service, $config['calendarId']);
+        return new GoogleCalendar($service, $calendarId);
     }
 }
