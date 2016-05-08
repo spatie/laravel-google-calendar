@@ -4,8 +4,8 @@ use Spatie\GoogleCalendar;
 
 class Event
 {
-    /** @var string  */
-    public $name = '';
+    /** @var string */
+    public $name;
 
     /** @var \Carbon\Carbon */
     public $startDateTime;
@@ -13,7 +13,7 @@ class Event
     /** @var \Carbon\Carbon */
     public $endDateTime;
 
-    /** @var bool  */
+    /** @var bool */
     protected $allDayEvent = false;
 
     public static function createFromGoogleCalendarEvent(Google_Service_Calendar_Event $googleEvent)  {
