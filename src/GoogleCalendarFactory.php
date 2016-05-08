@@ -6,7 +6,7 @@ use Google_Service_Calendar;
 
 class GoogleCalendarFactory
 {
-    public static function createForCalendarId()
+    public static function createForCalendarId() : GoogleCalendar
     {
         $config = config('laravel-google-calendar');
 

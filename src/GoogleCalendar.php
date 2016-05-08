@@ -3,8 +3,10 @@
 namespace Spatie\GoogleCalendar;
 
 use Carbon\Carbon;
+use Event;
 use Google_Service_Calendar;
 use Google_Service_Calendar_Event;
+use Illuminate\Support\Collection;
 
 class GoogleCalendar
 {
@@ -24,29 +26,28 @@ class GoogleCalendar
         $this->calendarId = $calendarId;
 
         $this->eventTransformer = function (Google_Service_Calendar_Event $event) {
-            return [
-                $event['start']['dateTime'],
-                $event['end']['dateTime'],
-                $event->summary,
-            ];
+            return Event::createFromGoogleCalendarEvent($event);
         };
     }
-
-    /**
-     * @return string
-     */
-    public function getCalendarId()
+    
+    public function getCalendarId() : string
     {
         return $this->calendarId;
     }
 
+    /**
+     * @param callable $eventTransformer
+     * @return $this
+     */
     public function setEventTransformer(callable $eventTransformer)
     {
         $this->eventTransformer = $eventTransformer;
+        
+        return $this;
     }
 
     /**
-     * List all events.
+     * List events.
      *
      * @param Carbon $startTime
      * @param Carbon $endTime
@@ -54,9 +55,9 @@ class GoogleCalendar
      *
      * @link https://developers.google.com/google-apps/calendar/v3/reference/events/list#parameters
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
-    public function listEvents(Carbon $startTime = null, Carbon $endTime = null, $queryParameters = [])
+    public function listEvents(Carbon $startTime = null, Carbon $endTime = null, $queryParameters = []) : Collection
     {
         $parameters = [];
 
@@ -78,11 +79,8 @@ class GoogleCalendar
 
         return collect($events)->map($this->eventTransformer);
     }
-
-    /**
-     * @return \Google_Service_Calendar|\Spatie\GoogleCalendar\Google_Service_Calendar
-     */
-    public function getService()
+    
+    public function getService() : Google_Service_Calendar
     {
         return $this->calendarService;
     }
