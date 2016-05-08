@@ -16,6 +16,6 @@ class GoogleCalendarFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'google-calendar';
+        return 'laravel-google-calendar';
     }
 }
