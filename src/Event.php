@@ -26,6 +26,19 @@ class Event
         return $event;
     }
 
+    public static function create(array $properties, $calendarId = null)
+    {
+        $event = new static;
+
+        $event->calendarId = static::getGoogleCalendar($calendarId)->getCalendarId();
+
+        foreach($properties as $name => $value) {
+            $event->$name = $value;
+        }
+        
+        return $event->save();
+    }
+
     public function __construct()
     {
         $this->googleEvent = new Google_Service_Calendar_Event();

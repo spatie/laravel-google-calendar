@@ -7,7 +7,37 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/spatie/laravel-google-calendar.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/laravel-google-calendar)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-google-calendar.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-google-calendar)
 
-Manage a Google calendar.
+This package makes working with a Google Calendar a breeze. Once it has been setup you can do these things:
+
+```php
+use Spatie\GoogleCalendar\Event;
+
+//create a new event
+$event = new Event;
+
+$event->name = 'my new event';
+$event->startDateTime = Carbon\Carbon::now();
+$event->endDateTime = Carbon\Carbon::now()->addHour();
+
+$event->save();
+
+// get all future events on a calendar
+$events = Event::get(); 
+
+$firstEvent = $event->first();
+$firstEvent->name = 'updated name';
+$firstEvent->save();
+
+// create a new event
+Event::create([
+   'name' => 'my new event'
+   'startDateTime' => Carbon\Carbon::now(),
+   'endDateTime' => Carbon\Carbon::now()->addHour(),
+]);
+
+// delete and event
+$event->delete();
+```
 
 Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
 
