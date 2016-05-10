@@ -65,7 +65,7 @@ class Event
 
     public function convertToGoogleEvent() : Google_Service_Calendar_Event
     {
-        $googleEvent = new Google_Service_Calendar_Event();
+        $googleEvent = $this->googleEvent ?? new Google_Service_Calendar_Event();
 
         $googleEvent->summary = $this->name;
         
@@ -73,12 +73,12 @@ class Event
         $end = new Google_Service_Calendar_EventDateTime();
         
         if ($this->allDayEvent) {
-            $start->setDateTime($this->startDateTime->format(DateTime::RFC3339));
-            $end->setDateTime($this->startDateTime->format(DateTime::RFC3339));
-        }
-        else {
             $start->setDate($this->startDateTime->format('Y-m-d'));
             $end->setDate($this->endDateTime->format('Y-m-d'));
+        }
+        else {
+            $start->setDateTime($this->startDateTime->format(DateTime::RFC3339));
+            $end->setDateTime($this->endDateTime->format(DateTime::RFC3339));
         }
         
         $googleEvent->setStart($start);
@@ -103,7 +103,9 @@ class Event
 
     public function save()
     {
+        $method = $this->googleEvent ? 'updateEvent' : 'insertEvent';
 
+        return $this->getGoogleCalendar()->$method($this);
     }
 
     public function delete($id = null)

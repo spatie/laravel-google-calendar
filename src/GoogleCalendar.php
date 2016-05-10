@@ -108,6 +108,20 @@ class GoogleCalendar
     }
 
     /**
+     * @param \Spatie\GoogleCalendar\Event|Google_Service_Calendar_Event $event
+     *
+     * @return \Google_Service_Calendar_Event
+     */
+    public function updateEvent($event)
+    {
+        if ($event instanceof Event) {
+            $event = $event->convertToGoogleEvent();
+        }
+
+        return $this->calendarService->events->update($this->calendarId, $event->id, $event);
+    }
+
+    /**
      * @param string|\Spatie\GoogleCalendar\Event $eventId
      */
     public function deleteEvent($eventId)
