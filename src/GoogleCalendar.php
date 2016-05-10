@@ -33,7 +33,7 @@ class GoogleCalendar
      *
      * @param Carbon $startDateTime
      * @param Carbon $endDateTime
-     * @param array $queryParameters
+     * @param array  $queryParameters
      *
      * @link https://developers.google.com/google-apps/calendar/v3/reference/events/list
      *
@@ -65,9 +65,10 @@ class GoogleCalendar
             ->map(function (Google_Service_Calendar_Event $event) {
                 return Event::createFromGoogleCalendarEvent($event, $this->calendarId);
             })
-        ->sortBy(function (Event $event) {
-           return $event->startDateTime->format(DATE_ISO8601);
-        });
+       // ->sortBy(function (Event $event) {
+       //    return $event->startDateTime->format(DATE_ISO8601);
+//        })
+;
 
         /*
         $debug = $events->map(function (Event $event) {
@@ -80,17 +81,18 @@ class GoogleCalendar
 
     /**
      * @param string $eventId
+     *
      * @return static
      */
     public function getEvent($eventId)
     {
-        $googleEvent =  $this->calendarService->events->get($this->calendarId, $eventId);
+        $googleEvent = $this->calendarService->events->get($this->calendarId, $eventId);
 
         return Event::createFromGoogleCalendarEvent($googleEvent, $this->calendarId);
     }
 
     /**
-     * Insert an event
+     * Insert an event.
      *
      * @param \Spatie\GoogleCalendar\Event|Google_Service_Calendar_Event $event
      *
@@ -101,7 +103,7 @@ class GoogleCalendar
     public function insertEvent($event)
     {
         if ($event instanceof Event) {
-            $event = $event->convertToGoogleEvent();
+            $event = $event->googleEvent;
         }
 
         return $this->calendarService->events->insert($this->calendarId, $event);
@@ -115,7 +117,7 @@ class GoogleCalendar
     public function updateEvent($event)
     {
         if ($event instanceof Event) {
-            $event = $event->convertToGoogleEvent();
+            $event = $event->googleEvent;
         }
 
         return $this->calendarService->events->update($this->calendarId, $event->id, $event);
