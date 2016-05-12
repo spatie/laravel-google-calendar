@@ -10,7 +10,7 @@ use Illuminate\Support\Collection;
 
 class GoogleCalendar
 {
-    /** @var \Spatie\GoogleCalendar\Google_Service_Calendar */
+    /** @var \Google_Service_Calendar */
     protected $calendarService;
 
     /** @var string */
@@ -125,6 +125,8 @@ class GoogleCalendar
 
     /**
      * @param string|\Spatie\GoogleCalendar\Event $eventId
+     * 
+     * @return mixed
      */
     public function deleteEvent($eventId)
     {
