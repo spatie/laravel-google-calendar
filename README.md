@@ -15,7 +15,7 @@ use Spatie\GoogleCalendar\Event;
 //create a new event
 $event = new Event;
 
-$event->name = 'my new event';
+$event->name = 'A new event';
 $event->startDateTime = Carbon\Carbon::now();
 $event->endDateTime = Carbon\Carbon::now()->addHour();
 
@@ -30,7 +30,7 @@ $firstEvent->save();
 
 // create a new event
 Event::create([
-   'name' => 'my new event'
+   'name' => 'A new event'
    'startDateTime' => Carbon\Carbon::now(),
    'endDateTime' => Carbon\Carbon::now()->addHour(),
 ]);
@@ -98,10 +98,64 @@ Read [this blogpost](https://murze.be/2016/05/how-to-setup-and-use-the-google-ca
 
 ## Usage
 
-``` php
-$skeleton = new Spatie\Skeleton();
-echo $skeleton->echoPhrase('Hello, Spatie!');
+### Listing all events
+
+You can fetch all events by simply calling `Event::get();` this will return all events of the coming year. An event comes in the form of a `Spatie\GoogleCalendar\Event` object.
+
+The fill signature of the function is:
+
+```php
+/**
+ * @param \Carbon\Carbon|null $startDateTime
+ * @param \Carbon\Carbon|null $endDateTime
+ * @param array $queryParameters
+ * @param string|null $calendarId
+ *
+ * @return \Illuminate\Support\Collection
+ */
+public static function get(Carbon $startDateTime = null, Carbon $endDateTime = null, array $queryParameters = [], string $calendarId = null) : Collection
 ```
+
+The parameters you can pass in `$querParameters` are listed [on the documentation on `list` at the Google Calendar API docs](https://developers.google.com/google-apps/calendar/v3/reference/events/list#request).
+
+### Creating an event
+
+You can just new up a `Spatie\GoogleCalendar\Event`-object
+
+```php
+$event = new Event;
+
+$event->name = 'A new event';
+$event->startDateTime = Carbon\Carbon::now();
+$event->endDateTime = Carbon\Carbon::now()->addHour();
+
+$event->save();
+```
+
+You can also call `create` statically:
+
+```php
+Event::create([
+   'name' => 'A new event'
+   'startDateTime' => Carbon\Carbon::now(),
+   'endDateTime' => Carbon\Carbon::now()->addHour(),
+]);
+```
+
+This will create an event with a specific start and end time. If you want to create a full day event you must use `startDate` and `endDate` instead of `startDateTime` and `endDateTime`.
+
+```php
+$event = new Event;
+
+$event->name = 'A new full day event';
+$event->startDate = Carbon\Carbon::now();
+$event->endDate = Carbon\Carbon::now()->addDay();
+
+$event->save();
+```
+
+### 
+
 
 ## Changelog
 

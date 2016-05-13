@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use DateTime;
 use Google_Service_Calendar_Event;
 use Google_Service_Calendar_EventDateTime;
+use Illuminate\Support\Collection;
 
 class Event
 {
@@ -90,7 +91,15 @@ class Event
         return is_null($this->googleEvent['start']['dateTime']);
     }
 
-    public static function get(Carbon $startDateTime = null, Carbon $endDateTime = null, $queryParameters = [], $calendarId = null)
+    /**
+     * @param \Carbon\Carbon|null $startDateTime
+     * @param \Carbon\Carbon|null $endDateTime
+     * @param array $queryParameters
+     * @param string|null $calendarId
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public static function get(Carbon $startDateTime = null, Carbon $endDateTime = null, array $queryParameters = [], string $calendarId = null) : Collection
     {
         $googleCalendar = self::getGoogleCalendar($calendarId);
 
