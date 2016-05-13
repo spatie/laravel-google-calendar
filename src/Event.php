@@ -111,9 +111,10 @@ class Event
             ->map(function (Google_Service_Calendar_Event $event) use ($calendarId) {
                 return Event::createFromGoogleCalendarEvent($event, $calendarId);
             })
-            ->sortBy(function(Event $event) {
+            ->sortBy(function (Event $event) {
                 return $event->sortDate;
-            });
+            })
+            ->values();
     }
 
     /**
@@ -127,7 +128,7 @@ class Event
         $googleCalendar = self::getGoogleCalendar($calendarId);
 
         $googleEvent = $googleCalendar->getEvent($eventId);
-        
+
         return Event::createFromGoogleCalendarEvent($googleEvent, $calendarId);
     }
 
@@ -137,8 +138,8 @@ class Event
 
         $googleCalendar = $this->getGoogleCalendar();
 
-        $googleEvent =  $googleCalendar->$method($this);
-        
+        $googleEvent = $googleCalendar->$method($this);
+
         return Event::createFromGoogleCalendarEvent($googleEvent, $googleCalendar->getCalendarId());
     }
 
@@ -177,7 +178,7 @@ class Event
         }
 
         if (in_array($name, ['start.dateTime', 'end.dateTime'])) {
-            $eventDateTime->setDate($date->format(DateTime::RFC3339));
+            $eventDateTime->setDateTime($date->format(DateTime::RFC3339));
         }
 
         if (starts_with($name, 'start')) {
@@ -196,18 +197,22 @@ class Event
             'startDate' => 'start.date',
             'endDate' => 'end.date',
             'startDateTime' => 'start.dateTime',
-            'endDateTime' => 'endDateTime',
+            'endDateTime' => 'end.dateTime',
         ];
 
         return $translations[$name] ?? $name;
     }
 
-    public function getSortDate() : Carbon
+    public function getSortDate()
     {
         if ($this->startDate) {
             return $this->startDate;
         }
 
-        return $this->startDateTime;
+        if ($this->startDateTime) {
+            return $this->startDateTime;
+        }
+
+        return null;
     }
 }
