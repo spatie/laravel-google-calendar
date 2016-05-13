@@ -61,7 +61,7 @@ class Event
         $value = array_get($this->googleEvent, $name);
 
         if (in_array($name, ['start.date', 'end.date']) && $value) {
-            $value = Carbon::createFromFormat('Y-m-d', $value);
+            $value = Carbon::createFromFormat('Y-m-d', $value)->startOfDay();
         }
 
         if (in_array($name, ['start.dateTime', 'end.dateTime']) && $value) {
@@ -159,7 +159,7 @@ class Event
      *
      * @return \Spatie\GoogleCalendar\GoogleCalendar
      */
-    protected static function getGoogleCalendar($calendarId = null) : GoogleCalendar
+    protected static function getGoogleCalendar($calendarId = null)
     {
         $calendarId = $calendarId ?? config('laravel-google-calendar.calendar_id');
 
