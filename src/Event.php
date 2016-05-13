@@ -29,7 +29,7 @@ class Event
 
     public static function create(array $properties, string $calendarId = null)
     {
-        $event = new static;
+        $event = new static();
 
         $event->calendarId = static::getGoogleCalendar($calendarId)->getCalendarId();
 
@@ -47,6 +47,7 @@ class Event
 
     /**
      * @param string $name
+     *
      * @return mixed
      */
     public function __get($name)
@@ -96,8 +97,8 @@ class Event
     /**
      * @param \Carbon\Carbon|null $startDateTime
      * @param \Carbon\Carbon|null $endDateTime
-     * @param array $queryParameters
-     * @param string|null $calendarId
+     * @param array               $queryParameters
+     * @param string|null         $calendarId
      *
      * @return \Illuminate\Support\Collection
      */
@@ -129,7 +130,7 @@ class Event
 
         $googleEvent = $googleCalendar->getEvent($eventId);
 
-        return Event::createFromGoogleCalendarEvent($googleEvent, $calendarId);
+        return self::createFromGoogleCalendarEvent($googleEvent, $calendarId);
     }
 
     public function save() : Event
@@ -140,7 +141,7 @@ class Event
 
         $googleEvent = $googleCalendar->$method($this);
 
-        return Event::createFromGoogleCalendarEvent($googleEvent, $googleCalendar->getCalendarId());
+        return self::createFromGoogleCalendarEvent($googleEvent, $googleCalendar->getCalendarId());
     }
 
     /**
@@ -166,7 +167,7 @@ class Event
     }
 
     /**
-     * @param string $name
+     * @param string         $name
      * @param \Carbon\Carbon $date
      */
     protected function setDateProperty(string $name, Carbon $date)
@@ -213,6 +214,6 @@ class Event
             return $this->startDateTime;
         }
 
-        return null;
+        return;
     }
 }

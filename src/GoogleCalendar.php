@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use DateTime;
 use Google_Service_Calendar;
 use Google_Service_Calendar_Event;
-use Illuminate\Support\Collection;
 
 class GoogleCalendar
 {
@@ -67,6 +66,7 @@ class GoogleCalendar
      * Get a single event.
      * 
      * @param string $eventId
+     *
      * @return \Google_Service_Calendar_Event
      */
     public function getEvent(string $eventId) : Google_Service_Calendar_Event
