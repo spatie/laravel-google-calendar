@@ -10,7 +10,7 @@ use Illuminate\Support\Collection;
 
 class Event
 {
-    /** @var Google_Service_Calendar_Event*/
+    /** @var Google_Service_Calendar_Event */
     public $googleEvent;
 
     /** @var int */
@@ -33,10 +33,10 @@ class Event
 
         $event->calendarId = static::getGoogleCalendar($calendarId)->getCalendarId();
 
-        foreach($properties as $name => $value) {
+        foreach ($properties as $name => $value) {
             $event->$name = $value;
         }
-        
+
         return $event->save();
     }
 
@@ -45,9 +45,17 @@ class Event
         $this->googleEvent = new Google_Service_Calendar_Event();
     }
 
+    /**
+     * @param string $name
+     * @return mixed
+     */
     public function __get($name)
     {
         $name = $this->translateFieldName($name);
+
+        if ($name === 'sortDate') {
+            return $this->getSortDate();
+        }
 
         $value = array_get($this->googleEvent, $name);
 
@@ -103,30 +111,41 @@ class Event
     {
         $googleCalendar = self::getGoogleCalendar($calendarId);
 
-        return $googleCalendar->listEvents($startDateTime, $endDateTime, $queryParameters);
+        $googleEvents = $googleCalendar->listEvents($startDateTime, $endDateTime, $queryParameters);
+
+        return collect($googleEvents)
+            ->map(function (Google_Service_Calendar_Event $event) use ($calendarId) {
+                return Event::createFromGoogleCalendarEvent($event, $calendarId);
+            });
     }
 
     /**
      * @param string $id
      * @param string $calendarId
      *
-     * @return mixed
+     * @return \Spatie\GoogleCalendar\Event
      */
-    public static function find($id, $calendarId = null)
+    public static function find($id, $calendarId = null) : Event
     {
         $googleCalendar = self::getGoogleCalendar($calendarId);
 
-        return $googleCalendar->getEvent($id);
+        $googleEvent = $googleCalendar->getEvent($id);
+        
+        return Event::createFromGoogleCalendarEvent($googleEvent, $calendarId);
     }
 
     /**
      * @return mixed
      */
-    public function save()
+    public function save() : Event
     {
         $method = $this->exists() ? 'updateEvent' : 'insertEvent';
 
-        return $this->getGoogleCalendar()->$method($this);
+        $googleCalendar = $this->getGoogleCalendar();
+
+        $googleEvent =  $googleCalendar->$method($this);
+        
+        return Event::createFromGoogleCalendarEvent($googleEvent, $googleCalendar->getCalendarId());
     }
 
     /**
@@ -152,7 +171,7 @@ class Event
     }
 
     /**
-     * @param string         $name
+     * @param string $name
      * @param \Carbon\Carbon $date
      */
     protected function setDateProperty($name, Carbon $date)
@@ -200,9 +219,18 @@ class Event
         }
 
         if ($name === 'endDateTime') {
-            return  'end.dateTime';
+            return 'end.dateTime';
         }
 
         return $name;
+    }
+
+    public function getSortDate() : Carbon
+    {
+        if ($this->startDate) {
+            return $this->startDate;
+        }
+
+        return $this->startDateTime;
     }
 }

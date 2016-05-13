@@ -46,6 +46,7 @@ class GoogleCalendar
         if (is_null($startDateTime)) {
             $startDateTime = Carbon::now()->startOfDay();
         }
+
         $parameters['timeMin'] = $startDateTime->format(DateTime::RFC3339);
 
         if (is_null($endDateTime)) {
@@ -55,28 +56,11 @@ class GoogleCalendar
 
         $parameters = array_merge($parameters, $queryParameters);
 
-        $googleEvents = $this
+        return $this
             ->calendarService
             ->events
             ->listEvents($this->calendarId, $parameters)
             ->getItems();
-
-        $events = collect($googleEvents)
-            ->map(function (Google_Service_Calendar_Event $event) {
-                return Event::createFromGoogleCalendarEvent($event, $this->calendarId);
-            })
-       // ->sortBy(function (Event $event) {
-       //    return $event->startDateTime->format(DATE_ISO8601);
-//        })
-;
-
-        /*
-        $debug = $events->map(function (Event $event) {
-            return $event->startDateTime->format('Y-m-d H:i:s') . ' - ' . $event->startDateTime->format('Y-m-d H:i:s') . $event->name . PHP_EOL;
-        });
-        */
-
-        return $events;
     }
 
     /**
@@ -86,9 +70,7 @@ class GoogleCalendar
      */
     public function getEvent($eventId)
     {
-        $googleEvent = $this->calendarService->events->get($this->calendarId, $eventId);
-
-        return Event::createFromGoogleCalendarEvent($googleEvent, $this->calendarId);
+        return $this->calendarService->events->get($this->calendarId, $eventId);
     }
 
     /**
@@ -133,6 +115,8 @@ class GoogleCalendar
         if ($eventId instanceof Event) {
             $eventId = $eventId->id;
         }
+        
+        dd($eventId);
 
         return $this->calendarService->events->delete($this->calendarId, $eventId);
     }
