@@ -98,7 +98,7 @@ Read [this blogpost](https://murze.be/2016/05/how-to-setup-and-use-the-google-ca
 
 ## Usage
 
-### Listing all events
+### Getting events
 
 You can fetch all events by simply calling `Event::get();` this will return all events of the coming year. An event comes in the form of a `Spatie\GoogleCalendar\Event` object.
 
@@ -154,7 +154,39 @@ $event->endDate = Carbon\Carbon::now()->addDay();
 $event->save();
 ```
 
-### 
+### Getting a single event
+
+Google assigns a unique id to every single event. You can get this id by getting events using the `get` method and getting the `id` property on a `Spatie\GoogleCalendar\Event`-object:
+```php
+// get the id of the first upcoming event in the calendar.
+$calendarId = Event::get()->first()->id;
+```
+
+You can use this id to fetch a single event from Google:
+```php
+Event::find($calendarId)
+```
+
+### Updating an event
+
+Easy, just change some properties and call `save()`:
+
+```php
+$event = Event::find($calendarId)
+
+$event->name = 'My updated title' 
+$event->save();
+```
+
+### Deleting an event
+
+Nothing to it!
+
+```php
+$event = Event::find($calendarId)
+
+$event->delete()
+```
 
 ### Limitations
 
