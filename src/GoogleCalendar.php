@@ -108,8 +108,6 @@ class GoogleCalendar
 
     /**
      * @param string|\Spatie\GoogleCalendar\Event $eventId
-     * 
-     * @return mixed
      */
     public function deleteEvent($eventId)
     {
@@ -117,7 +115,7 @@ class GoogleCalendar
             $eventId = $eventId->id;
         }
 
-        return $this->calendarService->events->delete($this->calendarId, $eventId);
+        $this->calendarService->events->delete($this->calendarId, $eventId);
     }
 
     public function getService() : Google_Service_Calendar
