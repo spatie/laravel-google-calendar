@@ -8,7 +8,7 @@ use Spatie\GoogleCalendar\GoogleCalendar;
 
 class GoogleCalendarTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var Mockery\Mock|Google_Service_Calendar */
+    /** @var \Mockery\Mock|Google_Service_Calendar */
     protected $googleServiceCalendar;
 
     /** @var string */
