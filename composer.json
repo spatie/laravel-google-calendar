@@ -1,8 +1,12 @@
 {
     "name": "spatie/laravel-google-calendar",
-    "description": "Manage a Google Calendar",
+    "description": "Manage events on a Google Calendar",
     "keywords": [
         "spatie",
+        "calendar",
+        "google",
+        "event",
+        "schedule",
         "laravel-google-calendar"
     ],
     "homepage": "https://github.com/spatie/laravel-google-calendar",
