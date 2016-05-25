@@ -91,7 +91,6 @@ return [
     'calendar_id' => '',
     
 ];
-
 ```
 
 Read [this blogpost](https://murze.be/2016/05/how-to-setup-and-use-the-google-calendar-api/) to learn how to get the correct values for `client_secret_json` and `calendar_id`.
