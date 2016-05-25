@@ -22,7 +22,7 @@ class GoogleCalendar
         $this->calendarId = $calendarId;
     }
 
-    public function getCalendarId() : string
+    public function getCalendarId(): string
     {
         return $this->calendarId;
     }
@@ -38,8 +38,11 @@ class GoogleCalendar
      *
      * @return array
      */
-    public function listEvents(Carbon $startDateTime = null, Carbon $endDateTime = null, array $queryParameters = [])
-    {
+    public function listEvents(
+        Carbon $startDateTime = null,
+        Carbon $endDateTime = null,
+        array $queryParameters = []
+    ) {
         $parameters = ['singleEvents' => true];
 
         if (is_null($startDateTime)) {
@@ -64,12 +67,12 @@ class GoogleCalendar
 
     /**
      * Get a single event.
-     * 
+     *
      * @param string $eventId
      *
      * @return \Google_Service_Calendar_Event
      */
-    public function getEvent(string $eventId) : Google_Service_Calendar_Event
+    public function getEvent(string $eventId): Google_Service_Calendar_Event
     {
         return $this->calendarService->events->get($this->calendarId, $eventId);
     }
@@ -83,7 +86,7 @@ class GoogleCalendar
      *
      * @return \Google_Service_Calendar_Event
      */
-    public function insertEvent($event) : Google_Service_Calendar_Event
+    public function insertEvent($event): Google_Service_Calendar_Event
     {
         if ($event instanceof Event) {
             $event = $event->googleEvent;
@@ -97,7 +100,7 @@ class GoogleCalendar
      *
      * @return \Google_Service_Calendar_Event
      */
-    public function updateEvent($event) : Google_Service_Calendar_Event
+    public function updateEvent($event): Google_Service_Calendar_Event
     {
         if ($event instanceof Event) {
             $event = $event->googleEvent;
@@ -118,7 +121,7 @@ class GoogleCalendar
         $this->calendarService->events->delete($this->calendarId, $eventId);
     }
 
-    public function getService() : Google_Service_Calendar
+    public function getService(): Google_Service_Calendar
     {
         return $this->calendarService;
     }
