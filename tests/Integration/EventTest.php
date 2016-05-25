@@ -33,7 +33,7 @@ class EventTest extends TestCase
 
         $this->event->startDate = $now;
 
-        $this->assertEquals($now->format('Y-m-d'), $this->event->googleEvent['start']['date']);
+        $this->assertEquals($now->startOfDay()->format('Y-m-d'), $this->event->googleEvent['start']['date']);
 
         $this->assertEquals($now, $this->event->startDate);
     }
