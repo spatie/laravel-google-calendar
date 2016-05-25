@@ -52,7 +52,7 @@ class Event
      */
     public function __get($name)
     {
-        $name = $this->translateFieldName($name);
+        $name = $this->getFieldName($name);
 
         if ($name === 'sortDate') {
             return $this->getSortDate();
@@ -73,7 +73,7 @@ class Event
 
     public function __set($name, $value)
     {
-        $name = $this->translateFieldName($name);
+        $name = $this->getFieldName($name);
 
         if (in_array($name, ['start.date', 'end.date', 'start.dateTime', 'end.dateTime'])) {
             $this->setDateProperty($name, $value);
@@ -195,7 +195,7 @@ class Event
         }
     }
 
-    protected function translateFieldName(string $name): string
+    protected function getFieldName(string $name): string
     {
         $translations = [
             'name' => 'summary',
