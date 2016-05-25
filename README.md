@@ -35,7 +35,7 @@ Event::create([
    'endDateTime' => Carbon\Carbon::now()->addHour(),
 ]);
 
-// delete and event
+// delete an event
 $event->delete();
 ```
 
