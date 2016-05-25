@@ -28,10 +28,8 @@ class GoogleCalendar
     }
 
     /**
-     * List events.
-     *
-     * @param Carbon $startDateTime
-     * @param Carbon $endDateTime
+     * @param \Carbon\Carbon $startDateTime
+     * @param \Carbon\Carbon $endDateTime
      * @param array  $queryParameters
      *
      * @link https://developers.google.com/google-apps/calendar/v3/reference/events/list
@@ -42,7 +40,8 @@ class GoogleCalendar
         Carbon $startDateTime = null,
         Carbon $endDateTime = null,
         array $queryParameters = []
-    ) {
+    ): array 
+    {
         $parameters = ['singleEvents' => true];
 
         if (is_null($startDateTime)) {

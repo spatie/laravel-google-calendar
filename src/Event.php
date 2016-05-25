@@ -150,12 +150,10 @@ class Event
 
     /**
      * @param string $eventId
-     *
-     * @return mixed
      */
     public function delete(string $eventId = null)
     {
-        return $this->getGoogleCalendar($this->calendarId)->deleteEvent($eventId ?? $this->id);
+        $this->getGoogleCalendar($this->calendarId)->deleteEvent($eventId ?? $this->id);
     }
 
     /**
@@ -197,18 +195,16 @@ class Event
 
     protected function getFieldName(string $name): string
     {
-        $translations = [
+        return [
             'name' => 'summary',
             'startDate' => 'start.date',
             'endDate' => 'end.date',
             'startDateTime' => 'start.dateTime',
             'endDateTime' => 'end.dateTime',
-        ];
-
-        return $translations[$name] ?? $name;
+        ][$name] ?? $name;
     }
 
-    public function getSortDate()
+    public function getSortDate(): string
     {
         if ($this->startDate) {
             return $this->startDate;
@@ -217,7 +213,5 @@ class Event
         if ($this->startDateTime) {
             return $this->startDateTime;
         }
-
-        return;
     }
 }
