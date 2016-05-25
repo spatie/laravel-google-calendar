@@ -7,7 +7,7 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/spatie/laravel-google-calendar.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/laravel-google-calendar)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-google-calendar.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-google-calendar)
 
-This package makes working with a Google Calendar a breeze. Once it has been setup you can do these things:
+This package makes working with a Google Calendar a breeze. Once it has been set up you can do these things:
 
 ```php
 use Spatie\GoogleCalendar\Event;
