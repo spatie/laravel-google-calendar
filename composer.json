@@ -18,11 +18,11 @@
     "require": {
         "php" : "^7.0",
         "google/apiclient": "^1.1",
-        "illuminate/support": "^5.1",
+        "illuminate/support": "^5.1.16",
         "nesbot/carbon": "^1.21"
     },
     "require-dev": {
-        "phpunit/phpunit": "5.*",
+        "phpunit/phpunit": "^5.3.4",
         "orchestra/testbench": "^3.2",
         "mockery/mockery": "^0.9.5"
     },
