@@ -107,8 +107,7 @@ class Event
         Carbon $endDateTime = null,
         array $queryParameters = [],
         string $calendarId = null
-    ): Collection
-    {
+    ): Collection {
         $googleCalendar = static::getGoogleCalendar($calendarId);
 
         $googleEvents = $googleCalendar->listEvents($startDateTime, $endDateTime, $queryParameters);
