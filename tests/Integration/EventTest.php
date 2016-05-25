@@ -2,6 +2,7 @@
 
 namespace Spatie\GoogleCalendar\Test;
 
+use Carbon\Carbon;
 use DateTime;
 use Mockery;
 use Spatie\GoogleCalendar\Test\Integration\TestCase;
@@ -29,7 +30,7 @@ class EventTest extends TestCase
     /** @test */
     public function it_can_set_a_start_date()
     {
-        $now = \Carbon\Carbon::now();
+        $now = Carbon::now();
 
         $this->event->startDate = $now;
 
@@ -41,7 +42,7 @@ class EventTest extends TestCase
     /** @test */
     public function it_can_set_a_end_date()
     {
-        $now = \Carbon\Carbon::now();
+        $now = Carbon::now();
 
         $this->event->endDate = $now;
 
@@ -51,7 +52,7 @@ class EventTest extends TestCase
     /** @test */
     public function it_can_set_a_start_date_time()
     {
-        $now = \Carbon\Carbon::now();
+        $now = Carbon::now();
 
         $this->event->startDateTime = $now;
 
@@ -61,7 +62,7 @@ class EventTest extends TestCase
     /** @test */
     public function it_can_set_an_end_date_time()
     {
-        $now = \Carbon\Carbon::now();
+        $now = Carbon::now();
 
         $this->event->endDateTime = $now;
 
@@ -71,11 +72,11 @@ class EventTest extends TestCase
     /** @test */
     public function it_can_determine_a_sort_date()
     {
-        $now = \Carbon\Carbon::now();
+        $now = Carbon::now();
 
         $event = new Event;
 
-        $this->assertNull($event->getSortDate());
+        $this->assertEmpty($event->getSortDate());
 
         $event->startDateTime = $now;
 
@@ -95,14 +96,12 @@ class EventTest extends TestCase
     {
         $event = new Event();
 
-        $event->startDate = \Carbon\Carbon::now();
+        $event->startDate = Carbon::now();
 
         $this->assertTrue($event->isAllDayEvent());
 
-        $event->startDateTime = \Carbon\Carbon::now();
+        $event->startDateTime = Carbon::now();
 
         $this->assertFalse($event->isAllDayEvent());
     }
-
-
 }

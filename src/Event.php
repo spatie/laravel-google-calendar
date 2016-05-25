@@ -213,5 +213,7 @@ class Event
         if ($this->startDateTime) {
             return $this->startDateTime;
         }
+
+        return '';
     }
 }
