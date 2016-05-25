@@ -189,7 +189,7 @@ $event->delete()
 
 ### Limitations
 
-The Google Calendar API provides many options. This package doesn't support all options. For instance Recurring events cannot be managed properly with this package. If you stick to creating events with a name and a date you should be fine.
+The Google Calendar API provides many options. This package doesn't support all of them. For instance recurring events cannot be managed properly with this package. If you stick to creating events with a name and a date you should be fine.
 
 ## Changelog
 
