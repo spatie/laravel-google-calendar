@@ -20,7 +20,6 @@ class EventTest extends TestCase
         $this->event = new Event();
     }
 
-    
     /** @test */
     public function it_will_use_the_calendar_id_from_the_config_file_by_default()
     {
@@ -74,7 +73,7 @@ class EventTest extends TestCase
     {
         $now = Carbon::now();
 
-        $event = new Event;
+        $event = new Event();
 
         $this->assertEmpty($event->getSortDate());
 
