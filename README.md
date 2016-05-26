@@ -171,7 +171,7 @@ Event::find($calendarId)
 Easy, just change some properties and call `save()`:
 
 ```php
-$event = Event::find($calendarId)
+$event = Event::find($eventId)
 
 $event->name = 'My updated title' 
 $event->save();
@@ -182,7 +182,7 @@ $event->save();
 Nothing to it!
 
 ```php
-$event = Event::find($calendarId)
+$event = Event::find($eventId)
 
 $event->delete()
 ```
