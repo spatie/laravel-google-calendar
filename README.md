@@ -24,7 +24,7 @@ $event->save();
 // get all future events on a calendar
 $events = Event::get(); 
 
-$firstEvent = $event->first();
+$firstEvent = $events->first();
 $firstEvent->name = 'updated name';
 $firstEvent->save();
 
