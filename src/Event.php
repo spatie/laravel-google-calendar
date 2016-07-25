@@ -197,6 +197,7 @@ class Event
     {
         return [
             'name' => 'summary',
+            'description' => 'description',
             'startDate' => 'start.date',
             'endDate' => 'end.date',
             'startDateTime' => 'start.dateTime',
