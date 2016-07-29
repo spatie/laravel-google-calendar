@@ -6,7 +6,6 @@ All Notable changes to `laravel-google-calendar` will be documented in this file
 
 - fixed a bug where creating an event on an alternative calendar would fail.
 
-
 ### 1.0.0 - 2016-05-24
 
 - initial release
