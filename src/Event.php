@@ -141,7 +141,7 @@ class Event
     {
         $method = $this->exists() ? 'updateEvent' : 'insertEvent';
 
-        $googleCalendar = $this->getGoogleCalendar();
+        $googleCalendar = $this->getGoogleCalendar($this->calendarId);
 
         $googleEvent = $googleCalendar->$method($this);
 
@@ -197,6 +197,7 @@ class Event
     {
         return [
             'name' => 'summary',
+            'description' => 'description',
             'startDate' => 'start.date',
             'endDate' => 'end.date',
             'startDateTime' => 'start.dateTime',
