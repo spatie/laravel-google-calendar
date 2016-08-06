@@ -178,10 +178,12 @@ class Event
 
         if (in_array($name, ['start.date', 'end.date'])) {
             $eventDateTime->setDate($date->format('Y-m-d'));
+            $eventDateTime->setTimezone($date->getTimezone());
         }
 
         if (in_array($name, ['start.dateTime', 'end.dateTime'])) {
             $eventDateTime->setDateTime($date->format(DateTime::RFC3339));
+            $eventDateTime->setTimezone($date->getTimezone());
         }
 
         if (starts_with($name, 'start')) {
