@@ -5,8 +5,8 @@ namespace Spatie\GoogleCalendar\Test;
 use Carbon\Carbon;
 use DateTime;
 use Mockery;
-use Spatie\GoogleCalendar\Test\Integration\TestCase;
 use Spatie\GoogleCalendar\Event;
+use Spatie\GoogleCalendar\Test\Integration\TestCase;
 
 class EventTest extends TestCase
 {

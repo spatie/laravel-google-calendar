@@ -140,9 +140,8 @@ class Event
     public function save($forceCreate = false): Event
     {
         $method = $this->exists() ? 'updateEvent' : 'insertEvent';
-        
-        if($forceCreate)
-        {
+
+        if ($forceCreate) {
             $method = 'insertEvent';
         }
 
@@ -203,12 +202,12 @@ class Event
     protected function getFieldName(string $name): string
     {
         return [
-            'name' => 'summary',
-            'description' => 'description',
-            'startDate' => 'start.date',
-            'endDate' => 'end.date',
+            'name'          => 'summary',
+            'description'   => 'description',
+            'startDate'     => 'start.date',
+            'endDate'       => 'end.date',
             'startDateTime' => 'start.dateTime',
-            'endDateTime' => 'end.dateTime',
+            'endDateTime'   => 'end.dateTime',
         ][$name] ?? $name;
     }
 
