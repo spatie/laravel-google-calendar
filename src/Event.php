@@ -37,7 +37,7 @@ class Event
             $event->$name = $value;
         }
 
-        return $event->save();
+        return $event->save(true);
     }
 
     public function __construct()
@@ -137,9 +137,14 @@ class Event
         return static::createFromGoogleCalendarEvent($googleEvent, $calendarId);
     }
 
-    public function save(): Event
+    public function save($forceCreate = false): Event
     {
         $method = $this->exists() ? 'updateEvent' : 'insertEvent';
+        
+        if($forceCreate)
+        {
+            $method = 'insertEvent';
+        }
 
         $googleCalendar = $this->getGoogleCalendar($this->calendarId);
 
