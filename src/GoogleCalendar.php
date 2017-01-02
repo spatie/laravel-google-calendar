@@ -2,8 +2,8 @@
 
 namespace Spatie\GoogleCalendar;
 
-use Carbon\Carbon;
 use DateTime;
+use Carbon\Carbon;
 use Google_Service_Calendar;
 use Google_Service_Calendar_Event;
 
