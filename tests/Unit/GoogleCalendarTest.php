@@ -2,8 +2,8 @@
 
 namespace Spatie\GoogleCalendar\Test\Unit;
 
-use Google_Service_Calendar;
 use Mockery;
+use Google_Service_Calendar;
 use Spatie\GoogleCalendar\GoogleCalendar;
 
 class GoogleCalendarTest extends \PHPUnit_Framework_TestCase
