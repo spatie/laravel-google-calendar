@@ -114,7 +114,7 @@ class Event
 
         return collect($googleEvents)
             ->map(function (Google_Service_Calendar_Event $event) use ($calendarId) {
-                return Event::createFromGoogleCalendarEvent($event, $calendarId);
+                return static::createFromGoogleCalendarEvent($event, $calendarId);
             })
             ->sortBy(function (Event $event) {
                 return $event->sortDate;
