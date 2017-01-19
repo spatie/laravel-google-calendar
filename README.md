@@ -23,7 +23,7 @@ $event->endDateTime = Carbon\Carbon::now()->addHour();
 $event->save();
 
 // get all future events on a calendar
-$events = Event::get(); 
+$events = Event::get();
 
 $firstEvent = $events->first();
 $firstEvent->name = 'updated name';
@@ -98,7 +98,7 @@ return [
      *  The id of the Google Calendar that will be used by default.
      */
     'calendar_id' => '',
-    
+
 ];
 ```
 
@@ -110,7 +110,7 @@ Read [this blogpost](https://murze.be/2016/05/how-to-setup-and-use-the-google-ca
 
 You can fetch all events by simply calling `Event::get();` this will return all events of the coming year. An event comes in the form of a `Spatie\GoogleCalendar\Event` object.
 
-The fill signature of the function is:
+The full signature of the function is:
 
 ```php
 /**
@@ -124,7 +124,7 @@ The fill signature of the function is:
 public static function get(Carbon $startDateTime = null, Carbon $endDateTime = null, array $queryParameters = [], string $calendarId = null) : Collection
 ```
 
-The parameters you can pass in `$querParameters` are listed [on the documentation on `list` at the Google Calendar API docs](https://developers.google.com/google-apps/calendar/v3/reference/events/list#request).
+The parameters you can pass in `$queryParameters` are listed [on the documentation on `list` at the Google Calendar API docs](https://developers.google.com/google-apps/calendar/v3/reference/events/list#request).
 
 ### Creating an event
 
@@ -182,7 +182,7 @@ Easy, just change some properties and call `save()`:
 ```php
 $event = Event::find($eventId)
 
-$event->name = 'My updated title' 
+$event->name = 'My updated title'
 $event->save();
 ```
 
