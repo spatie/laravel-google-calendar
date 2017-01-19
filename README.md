@@ -172,7 +172,7 @@ $calendarId = Event::get()->first()->id;
 
 You can use this id to fetch a single event from Google:
 ```php
-Event::find($calendarId)
+Event::find($calendarId);
 ```
 
 ### Updating an event
@@ -180,9 +180,9 @@ Event::find($calendarId)
 Easy, just change some properties and call `save()`:
 
 ```php
-$event = Event::find($eventId)
+$event = Event::find($eventId);
 
-$event->name = 'My updated title'
+$event->name = 'My updated title';
 $event->save();
 ```
 
@@ -191,9 +191,9 @@ $event->save();
 Nothing to it!
 
 ```php
-$event = Event::find($eventId)
+$event = Event::find($eventId);
 
-$event->delete()
+$event->delete();
 ```
 
 ### Limitations
