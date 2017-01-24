@@ -126,6 +126,21 @@ public static function get(Carbon $startDateTime = null, Carbon $endDateTime = n
 
 The parameters you can pass in `$queryParameters` are listed [on the documentation on `list` at the Google Calendar API docs](https://developers.google.com/google-apps/calendar/v3/reference/events/list#request).
 
+### Accessing the start and the end dates of an event
+
+If you’re familiar with the [standard Calendar API response](https://developers.google.com/google-apps/calendar/v3/reference/events), the dates are inaccessible under their default paths in a collection that’s being returned by `Event::get()`. Instead, the package provides these getters to make dates available as [Carbon](https://github.com/briannesbitt/Carbon) instances:
+
+```php
+$events = Event::get();
+
+foreach ($events as $event) {
+    $startDate     = $event->startDate;
+    $startDateTime = $event->startDateTime;
+    $endDate       = $event->endDate;
+    $endDateTime   = $event->endDateTime;
+}
+```
+
 ### Creating an event
 
 You can just new up a `Spatie\GoogleCalendar\Event`-object
