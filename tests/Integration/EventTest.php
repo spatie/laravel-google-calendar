@@ -89,7 +89,7 @@ class EventTest extends TestCase
 
         $this->assertEquals('testname', $this->event->googleEvent['summary']);
     }
-    
+
     /** @test */
     public function it_can_set_a_location()
     {
