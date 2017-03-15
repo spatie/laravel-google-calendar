@@ -89,6 +89,14 @@ class EventTest extends TestCase
 
         $this->assertEquals('testname', $this->event->googleEvent['summary']);
     }
+    
+    /** @test */
+    public function it_can_set_a_location()
+    {
+        $this->event->location = 'Test Location';
+
+        $this->assertEquals('Test Location', $this->event->googleEvent->getLocation());
+    }
 
     /** @test */
     public function it_can_determine_if_an_event_is_an_all_day_event()
