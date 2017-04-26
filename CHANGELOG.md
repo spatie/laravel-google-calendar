@@ -2,18 +2,17 @@
 
 All Notable changes to `laravel-google-calendar` will be documented in this file
 
-### 1.0.3 - 2016-11-26
+### 1.1.0 - 2017-04-26
+- Added: `addAttendee` method to `Event`
 
-- fix for creation of events with custom ids
+### 1.0.3 - 2016-11-26
+- Fixed: Bug regarding creation of events with custom ids
 
 ### 1.0.2 - 2016-08-06
-
-- the timezone of a passed Carbon object will be used when creating events
+- Fixed: The timezone of a passed Carbon object will be used when creating events
 
 ### 1.0.1 - 2016-07-29
-
-- fixed a bug where creating an event on an alternative calendar would fail.
+- Fixed: Creating an event on an alternative calendar wont fail anymore
 
 ### 1.0.0 - 2016-05-24
-
-- initial release
+- Initial release
