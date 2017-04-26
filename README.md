@@ -19,8 +19,8 @@ $event = new Event;
 $event->name = 'A new event';
 $event->startDateTime = Carbon\Carbon::now();
 $event->endDateTime = Carbon\Carbon::now()->addHour();
-$event->addAttendees(['email' => 'youremail@gmail.com']);
-$event->addAttendees(['email' => 'anotherEmail@gmail.com']);
+$event->addAttendee(['email' => 'youremail@gmail.com']);
+$event->addAttendee(['email' => 'anotherEmail@gmail.com']);
 
 $event->save();
 

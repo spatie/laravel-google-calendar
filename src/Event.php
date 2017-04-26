@@ -200,7 +200,7 @@ class Event
         }
     }
 
-    public function addAttendees(array $attendees)
+    public function addAttendee(array $attendees)
     {
         $this->attendees[] = $attendees;
     }
