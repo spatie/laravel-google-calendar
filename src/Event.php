@@ -16,6 +16,8 @@ class Event
     /** @var int */
     protected $calendarId;
 
+    protected $attendees;
+
     public static function createFromGoogleCalendarEvent(Google_Service_Calendar_Event $googleEvent, $calendarId)
     {
         $event = new static();
@@ -42,6 +44,7 @@ class Event
 
     public function __construct()
     {
+        $this->attendees = [];
         $this->googleEvent = new Google_Service_Calendar_Event();
     }
 
@@ -143,6 +146,8 @@ class Event
 
         $googleCalendar = $this->getGoogleCalendar($this->calendarId);
 
+        $this->googleEvent->setAttendees($this->attendees);
+
         $googleEvent = $googleCalendar->$method($this);
 
         return static::createFromGoogleCalendarEvent($googleEvent, $googleCalendar->getCalendarId());
@@ -193,6 +198,11 @@ class Event
         if (starts_with($name, 'end')) {
             $this->googleEvent->setEnd($eventDateTime);
         }
+    }
+
+    public function addAttendees(array $attendees)
+    {
+        $this->attendees[] = $attendees;
     }
 
     protected function getFieldName(string $name): string
