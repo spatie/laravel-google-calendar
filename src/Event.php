@@ -10,7 +10,7 @@ use Google_Service_Calendar_EventDateTime;
 
 class Event
 {
-    /** @var Google_Service_Calendar_Event */
+    /** @var \Google_Service_Calendar_Event */
     public $googleEvent;
 
     /** @var int */
