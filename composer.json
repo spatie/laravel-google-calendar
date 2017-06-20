@@ -42,5 +42,15 @@
     },
     "scripts": {
         "test": "vendor/bin/phpunit"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Spatie\\GoogleCalendar\\GoogleCalendarServiceProvider"
+            ],
+            "aliases": {
+                "GoogleCalendar": "Spatie\\GoogleCalendar\\GoogleCalendarFacade"
+            }
+        }
     }
 }
