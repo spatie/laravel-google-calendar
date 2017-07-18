@@ -1,13 +1,18 @@
 <?php
 
-namespace Spatie\GoogleCalendar\Test\Integration;
+namespace Spatie\GoogleCalendar\Tests;
 
-use Orchestra\Testbench\TestCase as Orchestra;
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use Orchestra\Testbench\TestCase as OrchestraTestCase;
 use Spatie\GoogleCalendar\GoogleCalendarServiceProvider;
 
-abstract class TestCase extends Orchestra
+abstract class TestCase extends OrchestraTestCase
 {
-    /** @var string */
+    use MockeryPHPUnitIntegration;
+
+    /**
+     * @var string
+     */
     protected $calenderId;
 
     public function setUp()
@@ -22,7 +27,7 @@ abstract class TestCase extends Orchestra
      *
      * @return array
      */
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app) : array
     {
         return [
             GoogleCalendarServiceProvider::class,

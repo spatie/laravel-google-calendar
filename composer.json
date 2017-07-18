@@ -37,7 +37,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Spatie\\GoogleCalendar\\Test\\": "tests"
+            "Spatie\\GoogleCalendar\\Tests\\": "tests"
         }
     },
     "scripts": {
