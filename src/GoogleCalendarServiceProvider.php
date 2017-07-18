@@ -24,11 +24,11 @@ class GoogleCalendarServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/laravel-google-calendar.php', 'laravel-google-calendar');
 
-        $config = config('laravel-google-calendar');
+        $this->app->bind(GoogleCalendar::class, function () {
+            $config = config('laravel-google-calendar');
 
-        $this->guardAgainstInvalidConfiguration($config);
+            $this->guardAgainstInvalidConfiguration($config);
 
-        $this->app->bind(GoogleCalendar::class, function () use ($config) {
             return GoogleCalendarFactory::createForCalendarId($config['calendar_id']);
         });
 
