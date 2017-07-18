@@ -16,7 +16,7 @@ class Event
     public $googleEvent;
 
     /**
-     * @var int
+     * @var string
      */
     protected $calendarId;
 
@@ -42,7 +42,6 @@ class Event
         $event = new static;
 
         $event->googleEvent = $googleEvent;
-
         $event->calendarId = $calendarId;
 
         return $event;
