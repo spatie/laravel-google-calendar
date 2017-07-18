@@ -22,12 +22,6 @@ class EventTest extends TestCase
     }
 
     /** @test */
-    public function it_will_use_the_calendar_id_from_the_config_file_by_default()
-    {
-        $this->assertEquals($this->calenderId, $this->event->calendarId);
-    }
-
-    /** @test */
     public function it_can_set_a_start_date()
     {
         $now = Carbon::now();

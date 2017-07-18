@@ -13,14 +13,7 @@ abstract class TestCase extends OrchestraTestCase
     /**
      * @var string
      */
-    protected $calenderId;
-
-    public function setUp()
-    {
-        $this->calendarId = 'abc123';
-
-        parent::setUp();
-    }
+    protected $calendarId;
 
     /**
      * @param \Illuminate\Foundation\Application $app
@@ -35,10 +28,19 @@ abstract class TestCase extends OrchestraTestCase
     }
 
     /**
+     * Resolve application core configuration implementation.
+     *
      * @param \Illuminate\Foundation\Application $app
+     *
+     * @return void
      */
+    protected function resolveApplicationConfiguration($app)
+    {
+        parent::resolveApplicationConfiguration($app);
+    }
+
     protected function getEnvironmentSetUp($app)
     {
-        $app['config']->set('laravel-google-calendar.calendar_id', 'sqlite');
+        $app['config']->set('laravel-google-calendar.calendar_id', $this->calendarId = 'personal');
     }
 }
