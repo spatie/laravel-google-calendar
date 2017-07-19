@@ -1,20 +1,27 @@
 <?php
 
-namespace Spatie\GoogleCalendar\Test\Unit;
+namespace Spatie\GoogleCalendar\Tests\Unit;
 
-use Mockery;
 use Google_Service_Calendar;
+use Mockery;
+use PHPUnit\Framework\TestCase;
 use Spatie\GoogleCalendar\GoogleCalendar;
 
-class GoogleCalendarTest extends \PHPUnit_Framework_TestCase
+class GoogleCalendarTest extends TestCase
 {
-    /** @var \Mockery\Mock|Google_Service_Calendar */
+    /**
+     * @var \Mockery\Mock|Google_Service_Calendar
+     */
     protected $googleServiceCalendar;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $calendarId;
 
-    /** @var \Spatie\GoogleCalendar\GoogleCalendar */
+    /**
+     * @var \Spatie\GoogleCalendar\GoogleCalendar
+     */
     protected $googleCalendar;
 
     public function setUp()

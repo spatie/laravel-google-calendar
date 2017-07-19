@@ -4,9 +4,6 @@ namespace Spatie\GoogleCalendar;
 
 use Illuminate\Support\Facades\Facade;
 
-/**
- * @see \Spatie\GoogleCalendar\GoogleCalendar
- */
 class GoogleCalendarFacade extends Facade
 {
     /**

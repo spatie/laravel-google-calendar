@@ -2,19 +2,27 @@
 
 namespace Spatie\GoogleCalendar;
 
-use DateTime;
 use Carbon\Carbon;
+use DateTime;
 use Google_Service_Calendar;
 use Google_Service_Calendar_Event;
 
 class GoogleCalendar
 {
-    /** @var \Google_Service_Calendar */
+    /**
+     * @var \Google_Service_Calendar
+     */
     protected $calendarService;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $calendarId;
 
+    /**
+     * @param \Google_Service_Calendar $calendarService
+     * @param $calendarId
+     */
     public function __construct(Google_Service_Calendar $calendarService, $calendarId)
     {
         $this->calendarService = $calendarService;
@@ -22,7 +30,10 @@ class GoogleCalendar
         $this->calendarId = $calendarId;
     }
 
-    public function getCalendarId(): string
+    /**
+     * @return string
+     */
+    public function getCalendarId() : string
     {
         return $this->calendarId;
     }
@@ -30,17 +41,14 @@ class GoogleCalendar
     /**
      * @param \Carbon\Carbon $startDateTime
      * @param \Carbon\Carbon $endDateTime
-     * @param array          $queryParameters
+     * @param array $queryParameters
      *
      * @link https://developers.google.com/google-apps/calendar/v3/reference/events/list
      *
      * @return array
      */
-    public function listEvents(
-        Carbon $startDateTime = null,
-        Carbon $endDateTime = null,
-        array $queryParameters = []
-    ): array {
+    public function listEvents(Carbon $startDateTime = null, Carbon $endDateTime = null, array $queryParameters = []) : array
+    {
         $parameters = ['singleEvents' => true];
 
         if (is_null($startDateTime)) {
@@ -70,7 +78,7 @@ class GoogleCalendar
      *
      * @return \Google_Service_Calendar_Event
      */
-    public function getEvent(string $eventId): Google_Service_Calendar_Event
+    public function getEvent(string $eventId) : Google_Service_Calendar_Event
     {
         return $this->calendarService->events->get($this->calendarId, $eventId);
     }
@@ -84,7 +92,7 @@ class GoogleCalendar
      *
      * @return \Google_Service_Calendar_Event
      */
-    public function insertEvent($event): Google_Service_Calendar_Event
+    public function insertEvent($event) : Google_Service_Calendar_Event
     {
         if ($event instanceof Event) {
             $event = $event->googleEvent;
@@ -98,7 +106,7 @@ class GoogleCalendar
      *
      * @return \Google_Service_Calendar_Event
      */
-    public function updateEvent($event): Google_Service_Calendar_Event
+    public function updateEvent($event) : Google_Service_Calendar_Event
     {
         if ($event instanceof Event) {
             $event = $event->googleEvent;
@@ -119,7 +127,10 @@ class GoogleCalendar
         $this->calendarService->events->delete($this->calendarId, $eventId);
     }
 
-    public function getService(): Google_Service_Calendar
+    /**
+     * @return \Google_Service_Calendar
+     */
+    public function getService() : Google_Service_Calendar
     {
         return $this->calendarService;
     }

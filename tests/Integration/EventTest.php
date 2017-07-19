@@ -1,29 +1,24 @@
 <?php
 
-namespace Spatie\GoogleCalendar\Test;
+namespace Spatie\GoogleCalendar\Tests\Integration;
 
-use Mockery;
-use DateTime;
 use Carbon\Carbon;
+use DateTime;
 use Spatie\GoogleCalendar\Event;
-use Spatie\GoogleCalendar\Test\Integration\TestCase;
+use Spatie\GoogleCalendar\Tests\TestCase;
 
 class EventTest extends TestCase
 {
-    /** @var \Spatie\GoogleCalendar\Event|Mockery\Mock */
+    /**
+     * @var \Spatie\GoogleCalendar\Event
+     */
     protected $event;
 
     public function setUp()
     {
         parent::setUp();
 
-        $this->event = new Event();
-    }
-
-    /** @test */
-    public function it_will_use_the_calendar_id_from_the_config_file_by_default()
-    {
-        $this->assertEquals($this->calenderId, $this->event->calendarId);
+        $this->event = new Event;
     }
 
     /** @test */
@@ -73,7 +68,7 @@ class EventTest extends TestCase
     {
         $now = Carbon::now();
 
-        $event = new Event();
+        $event = new Event;
 
         $this->assertEmpty($event->getSortDate());
 
@@ -101,7 +96,7 @@ class EventTest extends TestCase
     /** @test */
     public function it_can_determine_if_an_event_is_an_all_day_event()
     {
-        $event = new Event();
+        $event = new Event;
 
         $event->startDate = Carbon::now();
 
