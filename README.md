@@ -101,7 +101,25 @@ return [
 
 ```
 
-Read [this blogpost](https://murze.be/2016/05/how-to-setup-and-use-the-google-calendar-api/) to learn how to get the correct values for `client_secret_json` and `calendar_id`.
+## How to obtain the credentials to communicate with Google Calendar
+
+The first thing you’ll need to do is to get some credentials to use Google API’s. I’m assuming that you’ve already created a Google account and are signed in. Head over to [Google API’s site](https://console.developers.google.com/apis) and click "Select a project" in the header.
+
+![1](https://spatie.github.io/laravel-google-calendar/v2/1.jpg)
+
+Next up we must specify which API’s the project may consume. In the list of available API’s click "Google Analytics API". On the next screen click "Enable".
+
+![2](https://spatie.github.io/laravel-google-calendar/v2/2.jpg)
+
+Now that you’ve created a project that has access to the Analytics API it’s time to download a file with these credentials. Click "Credentials" in the sidebar. You’ll want to create a "Service account key".
+
+![3](https://spatie.github.io/laravel-google-calendar/v2/3.jpg)
+
+On the next screen you can give the service account a name. You can name it anything you’d like. In the service account id you’ll see an email address. We’ll use this email address later on in this guide. Select "JSON" as the key type and click "Create" to download the JSON file.
+
+![4](https://spatie.github.io/laravel-google-calendar/v2/4.jpg)
+
+Save the json inside your Laravel project at the location specified in the `service_account_credentials_json` key of the config file of this package. Because the json file contains potentially sensitive information I don't recommend committing it to your git repository.
 
 ## Usage
 
