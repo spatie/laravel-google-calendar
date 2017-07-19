@@ -10,13 +10,13 @@ class GoogleCalendarServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../config/google-calendar.php' => config_path('google-calendar.php'),
+            __DIR__.'/../config/google-calendar.php' => config_path('google-calendar.php'),
         ], 'config');
     }
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/google-calendar.php', 'google-calendar');
+        $this->mergeConfigFrom(__DIR__.'/../config/google-calendar.php', 'google-calendar');
 
         $this->app->bind(GoogleCalendar::class, function () {
             $config = config('laravel-google-calendar');
