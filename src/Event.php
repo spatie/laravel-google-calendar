@@ -2,11 +2,11 @@
 
 namespace Spatie\GoogleCalendar;
 
-use Carbon\Carbon;
 use DateTime;
+use Carbon\Carbon;
 use Google_Service_Calendar_Event;
-use Google_Service_Calendar_EventDateTime;
 use Illuminate\Support\Collection;
+use Google_Service_Calendar_EventDateTime;
 
 class Event
 {

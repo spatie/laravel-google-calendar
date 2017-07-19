@@ -2,8 +2,8 @@
 
 namespace Spatie\GoogleCalendar\Tests\Unit;
 
-use Google_Service_Calendar;
 use Mockery;
+use Google_Service_Calendar;
 use PHPUnit\Framework\TestCase;
 use Spatie\GoogleCalendar\GoogleCalendar;
 

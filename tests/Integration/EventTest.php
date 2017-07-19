@@ -2,8 +2,8 @@
 
 namespace Spatie\GoogleCalendar\Tests\Integration;
 
-use Carbon\Carbon;
 use DateTime;
+use Carbon\Carbon;
 use Spatie\GoogleCalendar\Event;
 use Spatie\GoogleCalendar\Tests\TestCase;
 
