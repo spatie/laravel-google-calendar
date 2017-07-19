@@ -89,7 +89,7 @@ This will publish file called `google-calendar.php` in your config-directory wit
 ```
 return [
     /*
-     * Path to the client secret json file.
+     * Path to the json file containing the credentials.
      */
     'service_account_credentials_json' => storage_path('app/google-calendar/service-account-credentials.json'),
 
