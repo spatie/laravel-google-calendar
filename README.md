@@ -224,7 +224,7 @@ The Google Calendar API provides many options. This package doesn't support all 
 
 ## Upgrading from v1 to v2
 
-The only major difference between `v1` and `v2` is that under the hood Google API v2 is used instead of v1. To upgrade the package simply:
+The only major difference between `v1` and `v2` is that under the hood Google API v2 is used instead of v1. Here are the steps required to upgrade:
  - rename the config file from `laravel-google-calendar` to `google-calendar`
  - in the config file rename the `client_secret_json` key to `service_account_credentials_json`
 
