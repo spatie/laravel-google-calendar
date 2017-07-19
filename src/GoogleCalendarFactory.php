@@ -9,7 +9,7 @@ class GoogleCalendarFactory
 {
     public static function createForCalendarId(string $calendarId): GoogleCalendar
     {
-        $config = config('laravel-google-calendar');
+        $config = config('google-calendar');
 
         $client = self::createAuthenticatedGoogleClient($config);
 
