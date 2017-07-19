@@ -1,12 +1,13 @@
 <?php
 
-namespace Spatie\GoogleCalendar\Test\Unit;
+namespace Spatie\GoogleCalendar\Tests\Unit;
 
 use Mockery;
 use Google_Service_Calendar;
+use PHPUnit\Framework\TestCase;
 use Spatie\GoogleCalendar\GoogleCalendar;
 
-class GoogleCalendarTest extends \PHPUnit_Framework_TestCase
+class GoogleCalendarTest extends TestCase
 {
     /** @var \Mockery\Mock|Google_Service_Calendar */
     protected $googleServiceCalendar;
