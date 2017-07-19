@@ -103,7 +103,7 @@ return [
 
 ## How to obtain the credentials to communicate with Google Calendar
 
-The first thing you’ll need to do is to get some credentials to use Google API’s. I’m assuming that you’ve already created a Google account and are signed in. Head over to [Google API’s site](https://console.developers.google.com/apis) and click "Select a project" in the header.
+The first thing you’ll need to do is to get some credentials to use Google API’s. I’m assuming that you’ve already created a Google account and are signed in. Head over to [Google API console](https://console.developers.google.com/apis) and click "Select a project" in the header.
 
 ![1](https://spatie.github.io/laravel-google-calendar/v2/1.jpg)
 
