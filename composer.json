@@ -52,5 +52,8 @@
                 "GoogleCalendar": "Spatie\\GoogleCalendar\\GoogleCalendarFacade"
             }
         }
+    },
+    "config": {
+        "sort-packages": true
     }
 }
