@@ -167,7 +167,7 @@ class Event
 
     protected static function getGoogleCalendar(string $calendarId = null): GoogleCalendar
     {
-        $calendarId = $calendarId ?? config('laravel-google-calendar.calendar_id');
+        $calendarId = $calendarId ?? config('google-calendar.calendar_id');
 
         return GoogleCalendarFactory::createForCalendarId($calendarId);
     }
