@@ -121,6 +121,14 @@ On the next screen you can give the service account a name. You can name it anyt
 
 Save the json inside your Laravel project at the location specified in the `service_account_credentials_json` key of the config file of this package. Because the json file contains potentially sensitive information I don't recommend committing it to your git repository.
 
+Now that everything is set up on the API site, we’ll need to configure some things on the Google Calendar site. Head over Google Calendar and view the settings of the calendar you want to work with via PHP.  On the “Share this Calendar” tab add the service account id that was displayed when creating credentials on the API site. 
+
+![5](https://spatie.github.io/laravel-google-calendar/v2/5.jpg)
+
+Open up the “Calendar Details” tab to see the id of the calendar. You need to specify that id in the config file.
+
+![6](https://spatie.github.io/laravel-google-calendar/v2/6.jpg)
+
 ## Usage
 
 ### Getting events
