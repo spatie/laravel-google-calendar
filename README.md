@@ -222,6 +222,12 @@ $event->delete();
 
 The Google Calendar API provides many options. This package doesn't support all of them. For instance recurring events cannot be managed properly with this package. If you stick to creating events with a name and a date you should be fine.
 
+## Upgrading from v1 to v2
+
+The only major difference between `v1` and `v2` is that under the hood Google API v2 is used instead of v1. To upgrade the package simply:
+ - rename the config file from `laravel-google-calendar` to `google-calendar`
+ - in the config file rename the `client_secret_json` key to `service_account_credentials_json`
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
