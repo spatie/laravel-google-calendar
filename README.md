@@ -46,11 +46,11 @@ Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview 
 
 ## Postcardware
 
-You're free to use this package (it's [MIT-licensed](LICENSE.md)), but if it makes it to your production environment you are required to send us a postcard from your hometown, mentioning which of our package(s) you are using.
+You're free to use this package (it's [MIT-licensed](LICENSE.md)), but if it makes it to your production environment when highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using.
 
 Our address is: Spatie, Samberstraat 69D, 2060 Antwerp, Belgium.
 
-The best postcards will get published on the open source page on our website.
+All postcards are published [on our website](https://spatie.be/en/opensource/postcards).
 
 ## Installation
 
@@ -85,10 +85,8 @@ You must publish the configuration with this command:
 php artisan vendor:publish --provider="Spatie\GoogleCalendar\GoogleCalendarServiceProvider"
 ```
 
-This will publish file called `laravel-google-calendar.php` in your config-directory with this contents:
+This will publish file called `google-calendar.php` in your config-directory with this contents:
 ```
-<?php
-
 return [
 
     /**
@@ -100,7 +98,6 @@ return [
      *  The id of the Google Calendar that will be used by default.
      */
     'calendar_id' => '',
-
 ];
 ```
 
@@ -115,15 +112,7 @@ You can fetch all events by simply calling `Event::get();` this will return all 
 The full signature of the function is:
 
 ```php
-/**
- * @param \Carbon\Carbon|null $startDateTime
- * @param \Carbon\Carbon|null $endDateTime
- * @param array $queryParameters
- * @param string|null $calendarId
- *
- * @return \Illuminate\Support\Collection
- */
-public static function get(Carbon $startDateTime = null, Carbon $endDateTime = null, array $queryParameters = [], string $calendarId = null) : Collection
+public static function get(Carbon $startDateTime = null, Carbon $endDateTime = null, array $queryParameters = [], string $calendarId = null): Collection
 ```
 
 The parameters you can pass in `$queryParameters` are listed [on the documentation on `list` at the Google Calendar API docs](https://developers.google.com/google-apps/calendar/v3/reference/events/list#request).
@@ -222,7 +211,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recen
 ## Testing
 
 ``` bash
-$ composer test
+composer test
 ```
 
 ## Contributing
@@ -237,6 +226,8 @@ If you discover any security related issues, please email freek@spatie.be instea
 
 - [Freek Van der Herten](https://github.com/freekmurze)
 - [All Contributors](../../contributors)
+
+A big thank you to [Sebastiaan Luca](https://github.com/sebastiaanluca) for his big help creating v2 of this package.
 
 ## About Spatie
 Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).

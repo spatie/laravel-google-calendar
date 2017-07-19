@@ -7,12 +7,7 @@ use Google_Service_Calendar;
 
 class GoogleCalendarFactory
 {
-    /**
-     * @param string $calendarId
-     *
-     * @return \Spatie\GoogleCalendar\GoogleCalendar
-     */
-    public static function createForCalendarId(string $calendarId) : GoogleCalendar
+    public static function createForCalendarId(string $calendarId): GoogleCalendar
     {
         $config = config('laravel-google-calendar');
 
@@ -23,12 +18,7 @@ class GoogleCalendarFactory
         return self::createCalendarClient($service, $calendarId);
     }
 
-    /**
-     * @param array $config
-     *
-     * @return \Google_Client
-     */
-    public static function createAuthenticatedGoogleClient(array $config) : Google_Client
+    public static function createAuthenticatedGoogleClient(array $config): Google_Client
     {
         $client = new Google_Client;
 
@@ -41,13 +31,7 @@ class GoogleCalendarFactory
         return $client;
     }
 
-    /**
-     * @param \Google_Service_Calendar $service
-     * @param string $calendarId
-     *
-     * @return \Spatie\GoogleCalendar\GoogleCalendar
-     */
-    protected static function createCalendarClient(Google_Service_Calendar $service, string $calendarId) : GoogleCalendar
+    protected static function createCalendarClient(Google_Service_Calendar $service, string $calendarId): GoogleCalendar
     {
         return new GoogleCalendar($service, $calendarId);
     }

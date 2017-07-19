@@ -9,9 +9,7 @@ use Spatie\GoogleCalendar\Tests\TestCase;
 
 class EventTest extends TestCase
 {
-    /**
-     * @var \Spatie\GoogleCalendar\Event
-     */
+    /** @var \Spatie\GoogleCalendar\Event */
     protected $event;
 
     public function setUp()

@@ -10,19 +10,13 @@ use Illuminate\Support\Collection;
 
 class Event
 {
-    /**
-     * @var \Google_Service_Calendar_Event
-     */
+    /** @var \Google_Service_Calendar_Event */
     public $googleEvent;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $calendarId;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $attendees;
 
     public function __construct()
@@ -66,14 +60,6 @@ class Event
         return $event->save('insertEvent');
     }
 
-    /**
-     * @param \Carbon\Carbon|null $startDateTime
-     * @param \Carbon\Carbon|null $endDateTime
-     * @param array $queryParameters
-     * @param string|null $calendarId
-     *
-     * @return \Illuminate\Support\Collection
-     */
     public static function get(Carbon $startDateTime = null, Carbon $endDateTime = null, array $queryParameters = [], string $calendarId = null) : Collection
     {
         $googleCalendar = static::getGoogleCalendar($calendarId);
@@ -90,13 +76,7 @@ class Event
             ->values();
     }
 
-    /**
-     * @param string $eventId
-     * @param string $calendarId
-     *
-     * @return \Spatie\GoogleCalendar\Event
-     */
-    public static function find($eventId, $calendarId = null) : Event
+    public static function find($eventId, string $calendarId = null): Event
     {
         $googleCalendar = static::getGoogleCalendar($calendarId);
 
@@ -105,11 +85,6 @@ class Event
         return static::createFromGoogleCalendarEvent($googleEvent, $calendarId);
     }
 
-    /**
-     * @param string $name
-     *
-     * @return mixed
-     */
     public function __get($name)
     {
         $name = $this->getFieldName($name);
@@ -131,10 +106,6 @@ class Event
         return $value;
     }
 
-    /**
-     * @param $name
-     * @param $value
-     */
     public function __set($name, $value)
     {
         $name = $this->getFieldName($name);
@@ -148,28 +119,17 @@ class Event
         array_set($this->googleEvent, $name, $value);
     }
 
-    /**
-     * @return bool
-     */
-    public function exists() : bool
+    public function exists(): bool
     {
         return $this->id != '';
     }
 
-    /**
-     * @return bool
-     */
-    public function isAllDayEvent() : bool
+    public function isAllDayEvent(): bool
     {
         return is_null($this->googleEvent['start']['dateTime']);
     }
 
-    /**
-     * @param null $method
-     *
-     * @return \Spatie\GoogleCalendar\Event
-     */
-    public function save($method = null) : Event
+    public function save(string $method = null): Event
     {
         $method = $method ?? ($this->exists() ? 'updateEvent' : 'insertEvent');
 
@@ -182,26 +142,17 @@ class Event
         return static::createFromGoogleCalendarEvent($googleEvent, $googleCalendar->getCalendarId());
     }
 
-    /**
-     * @param string $eventId
-     */
     public function delete(string $eventId = null)
     {
         $this->getGoogleCalendar($this->calendarId)->deleteEvent($eventId ?? $this->id);
     }
 
-    /**
-     * @param array $attendees
-     */
     public function addAttendee(array $attendees)
     {
         $this->attendees[] = $attendees;
     }
 
-    /**
-     * @return string
-     */
-    public function getSortDate() : string
+    public function getSortDate(): string
     {
         if ($this->startDate) {
             return $this->startDate;
@@ -214,22 +165,13 @@ class Event
         return '';
     }
 
-    /**
-     * @param string $calendarId
-     *
-     * @return \Spatie\GoogleCalendar\GoogleCalendar
-     */
-    protected static function getGoogleCalendar($calendarId = null)
+    protected static function getGoogleCalendar(string $calendarId = null): GoogleCalendar
     {
         $calendarId = $calendarId ?? config('laravel-google-calendar.calendar_id');
 
         return GoogleCalendarFactory::createForCalendarId($calendarId);
     }
 
-    /**
-     * @param string $name
-     * @param \Carbon\Carbon $date
-     */
     protected function setDateProperty(string $name, Carbon $date)
     {
         $eventDateTime = new Google_Service_Calendar_EventDateTime;
@@ -253,12 +195,7 @@ class Event
         }
     }
 
-    /**
-     * @param string $name
-     *
-     * @return string
-     */
-    protected function getFieldName(string $name) : string
+    protected function getFieldName(string $name): string
     {
         return [
                    'name' => 'summary',

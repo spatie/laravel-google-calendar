@@ -10,16 +10,9 @@ abstract class TestCase extends OrchestraTestCase
 {
     use MockeryPHPUnitIntegration;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $calendarId;
 
-    /**
-     * @param \Illuminate\Foundation\Application $app
-     *
-     * @return array
-     */
     protected function getPackageProviders($app) : array
     {
         return [
@@ -27,11 +20,6 @@ abstract class TestCase extends OrchestraTestCase
         ];
     }
 
-    /**
-     * Define environment setup.
-     *
-     * @param \Illuminate\Foundation\Application $app
-     */
     protected function getEnvironmentSetUp($app)
     {
         $app['config']->set('laravel-google-calendar.calendar_id', $this->calendarId = 'personal');

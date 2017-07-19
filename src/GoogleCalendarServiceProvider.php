@@ -7,22 +7,16 @@ use Spatie\GoogleCalendar\Exceptions\InvalidConfiguration;
 
 class GoogleCalendarServiceProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap the application services.
-     */
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../config/laravel-google-calendar.php' => config_path('laravel-google-calendar.php'),
+            __DIR__ . '/../config/google-calendar.php' => config_path('google-calendar.php'),
         ], 'config');
     }
 
-    /**
-     * Register the application services.
-     */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/laravel-google-calendar.php', 'laravel-google-calendar');
+        $this->mergeConfigFrom(__DIR__ . '/../config/google-calendar.php', 'google-calendar');
 
         $this->app->bind(GoogleCalendar::class, function () {
             $config = config('laravel-google-calendar');
@@ -35,11 +29,6 @@ class GoogleCalendarServiceProvider extends ServiceProvider
         $this->app->alias(GoogleCalendar::class, 'laravel-google-calendar');
     }
 
-    /**
-     * @param array|null $config
-     *
-     * @throws \Spatie\GoogleCalendar\Exceptions\InvalidConfiguration
-     */
     protected function guardAgainstInvalidConfiguration(array $config = null)
     {
         if (empty($config['calendar_id'])) {

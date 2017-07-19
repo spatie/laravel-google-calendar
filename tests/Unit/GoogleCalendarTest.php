@@ -9,19 +9,13 @@ use Spatie\GoogleCalendar\GoogleCalendar;
 
 class GoogleCalendarTest extends TestCase
 {
-    /**
-     * @var \Mockery\Mock|Google_Service_Calendar
-     */
+    /** @var \Mockery\Mock|Google_Service_Calendar */
     protected $googleServiceCalendar;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $calendarId;
 
-    /**
-     * @var \Spatie\GoogleCalendar\GoogleCalendar
-     */
+    /** @var \Spatie\GoogleCalendar\GoogleCalendar */
     protected $googleCalendar;
 
     public function setUp()
