@@ -22,12 +22,12 @@
     "require": {
         "php": "^7.0",
         "google/apiclient": "^2.2",
-        "illuminate/support": "^5.4.0",
+        "illuminate/support": "^5.4.0|~5.5.x-dev",
         "nesbot/carbon": "^1.21"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.5",
-        "orchestra/testbench": "~3.4.6",
+        "orchestra/testbench": "~3.4.6|~3.5.x-dev",
         "phpunit/phpunit": "^6.2"
     },
     "autoload": {
