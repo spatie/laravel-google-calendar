@@ -150,10 +150,10 @@ You can use these getters to retrieve start and end date as [Carbon](https://git
 ```php
 $events = Event::get();
 
-$event[0]->startDate;
-$event[0]->startDateTime;
-$event[0]->endDate;
-$event[0]->endDateTime;
+$events[0]->startDate;
+$events[0]->startDateTime;
+$events[0]->endDate;
+$events[0]->endDateTime;
 ```
 
 ### Creating an event
