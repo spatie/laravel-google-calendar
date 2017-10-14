@@ -142,23 +142,15 @@ class Event
         return static::createFromGoogleCalendarEvent($googleEvent, $googleCalendar->getCalendarId());
     }
 
-    /**
-     * @param array $properties
-     *
-     * @return Event
-     */
-    public function update(array $properties): Event
+    public function update(array $attributes): Event
     {
-        foreach ($properties as $name => $value) {
+        foreach ($attributes as $name => $value) {
             $this->$name = $value;
         }
 
         return $this->save('updateEvent');
     }
 
-    /**
-     * @param string $eventId
-     */
     public function delete(string $eventId = null)
     {
         $this->getGoogleCalendar($this->calendarId)->deleteEvent($eventId ?? $this->id);

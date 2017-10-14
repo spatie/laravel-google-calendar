@@ -211,7 +211,7 @@ $event->name = 'My updated title';
 $event->save();
 ```
 
-Or use the update method on the event object:
+Alternatively you can use the update method:
 
 ```php
 $event = Event::find($eventId)
