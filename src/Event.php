@@ -76,6 +76,7 @@ class Event
                 if ($useUserOrder) {
                     return $index;
                 }
+
                 return $event->sortDate;
             })
             ->values();
