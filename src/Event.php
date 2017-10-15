@@ -66,11 +66,16 @@ class Event
 
         $googleEvents = $googleCalendar->listEvents($startDateTime, $endDateTime, $queryParameters);
 
+        $useUserOrder = isset($queryParameters['orderBy']);
+
         return collect($googleEvents)
             ->map(function (Google_Service_Calendar_Event $event) use ($calendarId) {
                 return static::createFromGoogleCalendarEvent($event, $calendarId);
             })
-            ->sortBy(function (Event $event) {
+            ->sortBy(function (Event $event, $index) use ($useUserOrder) {
+                if ($useUserOrder) {
+                    return $index;
+                }
                 return $event->sortDate;
             })
             ->values();
