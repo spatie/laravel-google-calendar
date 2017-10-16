@@ -2,6 +2,9 @@
 
 All notable changes to `laravel-google-calendar` will be documented in this file
 
+## 2.1.1 - 2017-10-16
+- improve sorting
+
 ## 2.1.0 - 2017-10-15
 - add `update` method
 
