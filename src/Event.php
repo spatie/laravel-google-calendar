@@ -154,6 +154,20 @@ class Event
     }
 
     /**
+     * @param array $properties
+     *
+     * @return \Spatie\GoogleCalendar\Event
+     */
+    public function update(array $properties): Event
+    {
+        foreach ($properties as $name => $value) {
+            $this->$name = $value;
+        }
+
+        return $this->save('updateEvent');
+    }
+
+    /**
      * @param string $eventId
      */
     public function delete(string $eventId = null)

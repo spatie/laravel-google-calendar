@@ -27,9 +27,12 @@ $event->save();
 // get all future events on a calendar
 $events = Event::get();
 
+// update existing event
 $firstEvent = $events->first();
 $firstEvent->name = 'updated name';
 $firstEvent->save();
+
+$firstEvent->update(['name' => 'updated again']);
 
 // create a new event
 Event::create([
@@ -200,6 +203,14 @@ $event = Event::find($eventId);
 $event->name = 'My updated title';
 $event->save();
 ```
+
+Alternatively you can use the update method:
+
+```php
+ $event = Event::find($eventId)
+ 
+ $event->update(['name' => 'My updated title']);
+ ```
 
 ### Deleting an event
 
