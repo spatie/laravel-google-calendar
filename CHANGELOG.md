@@ -2,6 +2,9 @@
 
 All Notable changes to `laravel-google-calendar` will be documented in this file
 
+### 1.2.0 - 2017-10-19
+- Added: `update` method to `Event`
+
 ### 1.1.0 - 2017-04-26
 - Added: `addAttendee` method to `Event`
 
