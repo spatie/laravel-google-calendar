@@ -135,7 +135,7 @@ class Event
         return is_null($this->googleEvent['start']['dateTime']);
     }
 
-    public function save(string $method = null): Event
+    public function save(string $method = null, $optParams = []): Event
     {
         $method = $method ?? ($this->exists() ? 'updateEvent' : 'insertEvent');
 
@@ -143,7 +143,7 @@ class Event
 
         $this->googleEvent->setAttendees($this->attendees);
 
-        $googleEvent = $googleCalendar->$method($this);
+        $googleEvent = $googleCalendar->$method($this, $optParams);
 
         return static::createFromGoogleCalendarEvent($googleEvent, $googleCalendar->getCalendarId());
     }
