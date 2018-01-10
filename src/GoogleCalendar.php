@@ -62,13 +62,13 @@ class GoogleCalendar
     /*
      * @link https://developers.google.com/google-apps/calendar/v3/reference/events/insert
      */
-    public function insertEvent($event): Google_Service_Calendar_Event
+    public function insertEvent($event, $optParams = []): Google_Service_Calendar_Event
     {
         if ($event instanceof Event) {
             $event = $event->googleEvent;
         }
 
-        return $this->calendarService->events->insert($this->calendarId, $event);
+        return $this->calendarService->events->insert($this->calendarId, $event, $optParams);
     }
 
     public function updateEvent($event): Google_Service_Calendar_Event

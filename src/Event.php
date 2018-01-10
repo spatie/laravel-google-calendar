@@ -47,7 +47,7 @@ class Event
      *
      * @return mixed
      */
-    public static function create(array $properties, string $calendarId = null)
+    public static function create(array $properties, string $calendarId = null, $optParams = [])
     {
         $event = new static;
 
@@ -57,7 +57,7 @@ class Event
             $event->$name = $value;
         }
 
-        return $event->save('insertEvent');
+        return $event->save('insertEvent', $optParams);
     }
 
     public static function get(Carbon $startDateTime = null, Carbon $endDateTime = null, array $queryParameters = [], string $calendarId = null) : Collection
@@ -135,7 +135,7 @@ class Event
         return is_null($this->googleEvent['start']['dateTime']);
     }
 
-    public function save(string $method = null): Event
+    public function save(string $method = null, $optParams = []): Event
     {
         $method = $method ?? ($this->exists() ? 'updateEvent' : 'insertEvent');
 
@@ -143,18 +143,18 @@ class Event
 
         $this->googleEvent->setAttendees($this->attendees);
 
-        $googleEvent = $googleCalendar->$method($this);
+        $googleEvent = $googleCalendar->$method($this, $optParams);
 
         return static::createFromGoogleCalendarEvent($googleEvent, $googleCalendar->getCalendarId());
     }
 
-    public function update(array $attributes): Event
+    public function update(array $attributes, $optParams = []): Event
     {
         foreach ($attributes as $name => $value) {
             $this->$name = $value;
         }
 
-        return $this->save('updateEvent');
+        return $this->save('updateEvent', $optParams);
     }
 
     public function delete(string $eventId = null)
