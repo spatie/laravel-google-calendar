@@ -36,7 +36,7 @@ $firstEvent->update(['name' => 'updated again']);
 
 // create a new event
 Event::create([
-   'name' => 'A new event'
+   'name' => 'A new event',
    'startDateTime' => Carbon\Carbon::now(),
    'endDateTime' => Carbon\Carbon::now()->addHour(),
 ]);
