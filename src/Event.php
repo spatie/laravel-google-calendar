@@ -82,7 +82,7 @@ class Event
             ->values();
     }
 
-    public static function find($eventId, string $calendarId = null): Event
+    public static function find($eventId, string $calendarId = null): self
     {
         $googleCalendar = static::getGoogleCalendar($calendarId);
 
@@ -135,7 +135,7 @@ class Event
         return is_null($this->googleEvent['start']['dateTime']);
     }
 
-    public function save(string $method = null, $optParams = []): Event
+    public function save(string $method = null, $optParams = []): self
     {
         $method = $method ?? ($this->exists() ? 'updateEvent' : 'insertEvent');
 
@@ -148,7 +148,7 @@ class Event
         return static::createFromGoogleCalendarEvent($googleEvent, $googleCalendar->getCalendarId());
     }
 
-    public function update(array $attributes, $optParams = []): Event
+    public function update(array $attributes, $optParams = []): self
     {
         foreach ($attributes as $name => $value) {
             $this->$name = $value;
