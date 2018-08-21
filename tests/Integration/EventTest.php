@@ -119,7 +119,7 @@ class EventTest extends TestCase
     public function it_can_determine_if_an_event_exists_by_using_exists()
     {
         $event = $this->find('abc123');
-        
+
         $this->assertFalse($event->exists());
     }
 }
