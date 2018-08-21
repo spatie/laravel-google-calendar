@@ -104,4 +104,20 @@ class EventTest extends TestCase
 
         $this->assertFalse($event->isAllDayEvent());
     }
+
+    /** @test */
+    public function it_can_determine_if_an_event_exists_by_using_find()
+    {
+        $event = new Event;
+        $event->find('abc123');
+        $this->assertNull($event->googleEvent);
+    }
+
+    /** @test */
+    public function it_can_determine_if_an_event_exists_by_using_exists()
+    {
+        $event = new Event;
+        $event->find('abc123');
+        $this->assertFalse($event->exists());
+    }
 }
