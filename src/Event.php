@@ -86,7 +86,11 @@ class Event
     {
         $googleCalendar = static::getGoogleCalendar($calendarId);
 
-        $googleEvent = $googleCalendar->getEvent($eventId);
+        try {
+            $googleEvent = $googleCalendar->getEvent($eventId);
+        } catch(\Google_Exception $e) {
+            $googleEvent = null;
+        }
 
         return static::createFromGoogleCalendarEvent($googleEvent, $calendarId);
     }
@@ -127,7 +131,7 @@ class Event
 
     public function exists(): bool
     {
-        return $this->id != '';
+        return !empty($this->id);
     }
 
     public function isAllDayEvent(): bool
