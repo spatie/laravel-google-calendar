@@ -23,6 +23,7 @@ class GoogleCalendarTest extends TestCase
         parent::setUp();
 
         $this->googleServiceCalendar = Mockery::mock(Google_Service_Calendar::class);
+        $this->googleServiceCalendar->shouldReceive('createBatch')->once();
 
         $this->calendarId = 'abc123';
 
