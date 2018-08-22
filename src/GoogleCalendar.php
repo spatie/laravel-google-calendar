@@ -74,6 +74,8 @@ class GoogleCalendar
 
     public function getEvents(iterable $eventIds, $optParams = [])
     {
+        $this->enableBatch(true);
+
         collect($eventIds)
             ->each(
                 function ($eventId, $batchIdentifier) use ($optParams) {
@@ -101,6 +103,8 @@ class GoogleCalendar
 
     public function insertEvents(iterable $events, $optParams = [])
     {
+        $this->enableBatch(true);
+
         collect($events)
             ->each(
                 function ($event, $batchIdentifier) use ($optParams) {
@@ -127,6 +131,8 @@ class GoogleCalendar
 
     public function updateEvents(iterable $events, $optParams = [])
     {
+        $this->enableBatch(true);
+
         collect($events)
             ->each(
                 function ($event, $batchIdentifier) use ($optParams) {
@@ -159,6 +165,8 @@ class GoogleCalendar
      */
     public function deleteEvents(iterable $eventIds, $optParams = [])
     {
+        $this->enableBatch(true);
+
         collect($eventIds)
             ->each(
                 function ($eventId, $batchIdentifier) use ($optParams) {
@@ -173,7 +181,7 @@ class GoogleCalendar
         return $this->calendarService;
     }
 
-    public function enableBatch(bool $bool)
+    protected function enableBatch(bool $bool)
     {
         $this->calendarService->getClient()->setUseBatch($bool);
 
