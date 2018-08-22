@@ -148,7 +148,7 @@ class GoogleCalendar
      *
      * @return RequestInterface
      */
-    public function deleteEvent($eventId,  $optParams = [])
+    public function deleteEvent($eventId, $optParams = [])
     {
         if ($eventId instanceof Event) {
             $eventId = $eventId->id;
