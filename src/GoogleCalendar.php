@@ -79,7 +79,7 @@ class GoogleCalendar
         collect($eventIds)
             ->each(
                 function ($eventId, $batchIdentifier) use ($optParams) {
-                    $this->batchRequests->add($this->getEvent($eventId, $optParams), $batchIdentifier);
+                    $this->batchRequests->add($this->getEvent($eventId, $optParams), "get-".$batchIdentifier);
                 });
 
         return $this;
@@ -108,7 +108,7 @@ class GoogleCalendar
         collect($events)
             ->each(
                 function ($event, $batchIdentifier) use ($optParams) {
-                    $this->batchRequests->add($this->insertEvent($event, $optParams), $batchIdentifier);
+                    $this->batchRequests->add($this->insertEvent($event, $optParams), "insert-".$batchIdentifier);
                 });
 
         return $this;
@@ -136,7 +136,7 @@ class GoogleCalendar
         collect($events)
             ->each(
                 function ($event, $batchIdentifier) use ($optParams) {
-                    $this->batchRequests->add($this->updateEvent($event, $optParams), $batchIdentifier);
+                    $this->batchRequests->add($this->updateEvent($event, $optParams), "update-".$batchIdentifier);
                 });
 
         return $this;
@@ -170,7 +170,7 @@ class GoogleCalendar
         collect($eventIds)
             ->each(
                 function ($eventId, $batchIdentifier) use ($optParams) {
-                    $this->batchRequests->add($this->deleteEvent($eventId, $optParams), $batchIdentifier);
+                    $this->batchRequests->add($this->deleteEvent($eventId, $optParams), "delete-".$batchIdentifier);
                 });
 
         return $this;
