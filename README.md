@@ -191,12 +191,12 @@ $event->save();
 Google assigns a unique id to every single event. You can get this id by getting events using the `get` method and getting the `id` property on a `Spatie\GoogleCalendar\Event`-object:
 ```php
 // get the id of the first upcoming event in the calendar.
-$calendarId = Event::get()->first()->id;
+$eventId = Event::get()->first()->id;
 ```
 
 You can use this id to fetch a single event from Google:
 ```php
-Event::find($calendarId);
+Event::find($eventId);
 ```
 
 ### Updating an event
