@@ -32,7 +32,10 @@ class GoogleCalendar
      */
     public function listEvents(Carbon $startDateTime = null, Carbon $endDateTime = null, array $queryParameters = []): array
     {
-        $parameters = ['singleEvents' => true];
+        $parameters = [
+            'singleEvents' => true,
+            'orderBy' => 'startTime',
+        ];
 
         if (is_null($startDateTime)) {
             $startDateTime = Carbon::now()->startOfDay();
