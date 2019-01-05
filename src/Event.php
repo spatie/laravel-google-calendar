@@ -179,6 +179,53 @@ class Event
 
         return '';
     }
+    /**
+     * Setup a notification channel to a resource
+     * @param  array       $postBody   Channel request body
+     * 
+     * @postBody string address  Receiving URL
+     * 
+     * @postBody long expiration  Channel expiration time
+     * 
+     * @postBody string id  A UUID or similar unique string that identifies this channel
+     * 
+     * @postBody string kind Identifies this as a notification channel used to 
+     * watch for changes to a resource;
+     * 
+     * @postBody array params Additional parameters controlling delivery channel behavior
+     * 
+     * @postBody string payload;
+     * 
+     * @postBody string resourceId An opaque ID that identifies the resource 
+     * being watched on this channel
+     * 
+     * @postBody string resourceUri A version-specific identifier for the 
+     * watched resource
+     * 
+     * @postBody string token An arbitrary string delivered to the target 
+     * address with each notification delivered over this channel
+     * 
+     * @postBody string type The type of delivery mechanism used for this channel
+     * 
+     * @param  array       $optParams  Optional parameters
+     * @param  string|null $calendarId  Calendar ID
+     * @return Google_Service_Calendar_Channel
+     */
+    public function watch(array $postBody, $optParams = [],string $calendarId = null)
+    {
+
+        $calendar = $calendarId ?? static::getGoogleCalendar();
+        $calendarService = $calendar->getService();
+        $calendarId = $calendar->getCalendarId();
+        $calendarChannel = new Google_Service_Calendar_Channel();
+
+        foreach($postBody as $key => $item){
+            $method = "set".$key;
+            $calendarChannel->$method($item);
+        }
+
+        return $calendarService->events->watch($calendarId,$calendarChannel,$optParams);
+    }     
 
     protected static function getGoogleCalendar(string $calendarId = null): GoogleCalendar
     {
