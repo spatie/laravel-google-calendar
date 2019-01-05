@@ -10,13 +10,19 @@ use Google_Service_Calendar_EventDateTime;
 
 class Event
 {
-    /** @var \Google_Service_Calendar_Event */
+    /**
+     * @var \Google_Service_Calendar_Event 
+     */
     public $googleEvent;
 
-    /** @var string */
+    /**
+     * @var string 
+     */
     protected $calendarId;
 
-    /** @var array */
+    /**
+     * @var array 
+     */
     protected $attendees;
 
     public function __construct()
@@ -42,7 +48,7 @@ class Event
     }
 
     /**
-     * @param array $properties
+     * @param array       $properties
      * @param string|null $calendarId
      *
      * @return mixed
@@ -69,16 +75,20 @@ class Event
         $useUserOrder = isset($queryParameters['orderBy']);
 
         return collect($googleEvents)
-            ->map(function (Google_Service_Calendar_Event $event) use ($calendarId) {
-                return static::createFromGoogleCalendarEvent($event, $calendarId);
-            })
-            ->sortBy(function (Event $event, $index) use ($useUserOrder) {
-                if ($useUserOrder) {
-                    return $index;
+            ->map(
+                function (Google_Service_Calendar_Event $event) use ($calendarId) {
+                    return static::createFromGoogleCalendarEvent($event, $calendarId);
                 }
+            )
+            ->sortBy(
+                function (Event $event, $index) use ($useUserOrder) {
+                    if ($useUserOrder) {
+                        return $index;
+                    }
 
-                return $event->sortDate;
-            })
+                    return $event->sortDate;
+                }
+            )
             ->values();
     }
 
@@ -181,7 +191,8 @@ class Event
     }
     /**
      * Setup a notification channel to a resource
-     * @param  array       $postBody   Channel request body
+     *
+     * @param array       $postBody   Channel request body
      * 
      * @postBody string address  Receiving URL
      * 
@@ -208,7 +219,7 @@ class Event
      * @postBody string type The type of delivery mechanism used for this channel
      * 
      * @param  array       $optParams  Optional parameters
-     * @param  string|null $calendarId  Calendar ID
+     * @param  string|null $calendarId Calendar ID
      * @return Google_Service_Calendar_Channel
      */
     public function watch(array $postBody, $optParams = [],string $calendarId = null)
@@ -224,7 +235,7 @@ class Event
             $calendarChannel->$method($item);
         }
 
-        return $calendarService->events->watch($calendarId,$calendarChannel,$optParams);
+        return $calendarService->events->watch($calendarId, $calendarChannel, $optParams);
     }     
 
     protected static function getGoogleCalendar(string $calendarId = null): GoogleCalendar
