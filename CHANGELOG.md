@@ -2,6 +2,9 @@
 
 All notable changes to `laravel-google-calendar` will be documented in this file
 
+## 2.2.2 - 2019-02-27
+- allow carbon v2
+
 ## 2.2.1 - 2018-09-27
 - `listEvents` now returns events sorted chronologically
 
