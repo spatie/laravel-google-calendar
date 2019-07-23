@@ -4,6 +4,8 @@ namespace Spatie\GoogleCalendar;
 
 use DateTime;
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Google_Service_Calendar_Event;
 use Illuminate\Support\Collection;
 use Google_Service_Calendar_EventDateTime;
@@ -99,7 +101,7 @@ class Event
             return $this->getSortDate();
         }
 
-        $value = array_get($this->googleEvent, $name);
+        $value = Arr::get($this->googleEvent, $name);
 
         if (in_array($name, ['start.date', 'end.date']) && $value) {
             $value = Carbon::createFromFormat('Y-m-d', $value)->startOfDay();
@@ -122,7 +124,7 @@ class Event
             return;
         }
 
-        array_set($this->googleEvent, $name, $value);
+        Arr::set($this->googleEvent, $name, $value);
     }
 
     public function exists(): bool
@@ -201,11 +203,11 @@ class Event
             $eventDateTime->setTimezone($date->getTimezone());
         }
 
-        if (starts_with($name, 'start')) {
+        if (Str::startsWith($name, 'start')) {
             $this->googleEvent->setStart($eventDateTime);
         }
 
-        if (starts_with($name, 'end')) {
+        if (Str::startsWith($name, 'end')) {
             $this->googleEvent->setEnd($eventDateTime);
         }
     }
