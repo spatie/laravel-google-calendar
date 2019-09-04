@@ -2,6 +2,9 @@
 
 All notable changes to `laravel-google-calendar` will be documented in this file
 
+## 2.3.0 - 2019-09-04
+- Laravel 6 compatibility; dropped support for older versions
+
 ## 2.2.2 - 2019-02-27
 - allow carbon v2
 

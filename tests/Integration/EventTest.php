@@ -12,7 +12,7 @@ class EventTest extends TestCase
     /** @var \Spatie\GoogleCalendar\Event */
     protected $event;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

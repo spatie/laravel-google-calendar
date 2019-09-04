@@ -18,7 +18,7 @@ class GoogleCalendarTest extends TestCase
     /** @var \Spatie\GoogleCalendar\GoogleCalendar */
     protected $googleCalendar;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
