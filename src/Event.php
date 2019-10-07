@@ -74,7 +74,7 @@ class Event
             ->map(function (Google_Service_Calendar_Event $event) use ($calendarId) {
                 return static::createFromGoogleCalendarEvent($event, $calendarId);
             })
-            ->sortBy(function (Event $event, $index) use ($useUserOrder) {
+            ->sortBy(function (self $event, $index) use ($useUserOrder) {
                 if ($useUserOrder) {
                     return $index;
                 }
