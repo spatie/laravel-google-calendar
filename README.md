@@ -97,11 +97,11 @@ return [
 
 ## How to obtain the credentials to communicate with Google Calendar
 
-The first thing you’ll need to do is to get some credentials to use Google API’s. I’m assuming that you’ve already created a Google account and are signed in. Head over to [Google API console](https://console.developers.google.com/apis) and click "Select a project" in the header.
+The first thing you’ll need to do is get credentials to use Google's API. I’m assuming that you’ve already created a Google account and are signed in. Head over to [Google API console](https://console.developers.google.com/apis) and click "Select a project" in the header.
 
 ![1](./docs/v2/1.png)
 
-Next up we must specify which API's the project may consume. From the header, select "Enable APIs and Services".
+Next up we must specify which APIs the project may consume. From the header, select "Enable APIs and Services".
 
 ![2](./docs/v2/2.png)
 
