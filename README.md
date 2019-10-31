@@ -79,7 +79,7 @@ You must publish the configuration with this command:
 php artisan vendor:publish --provider="Spatie\GoogleCalendar\GoogleCalendarServiceProvider"
 ```
 
-This will publish file called `google-calendar.php` in your config-directory with this contents:
+This will publish a file called `google-calendar.php` in your config-directory with these contents:
 ```
 return [
     /*
@@ -121,13 +121,13 @@ From this page, open the "Create credentials" drop-down and select "Service acco
 
 ![6](./docs/v2/6.png)
 
-On the next screen you can give the service account a name. You can name it anything you’d like. In the service account id you’ll see an email address. We’ll use this email address later on in this guide. Select "JSON" as the key type and click "Create" to download the JSON file. You will get a warning that the service account does not have a role, you can safely ignore this and create the service account without assigning a role.
+On the next screen, you can give the service account a name. You can name it anything you’d like. In the service account id you’ll see an email address. We’ll use this email address later on in this guide. Select "JSON" as the key type and click "Create" to download the JSON file. You will get a warning that the service account does not have a role, you can safely ignore this and create the service account without assigning a role.
 
 ![7](./docs/v2/7.png)
 
-Save the json inside your Laravel project at the location specified in the `service_account_credentials_json` key of the config file of this package. Because the json file contains potentially sensitive information I don't recommend committing it to your git repository.
+Save the json inside your Laravel project at the location specified in the `service_account_credentials_json` key of the config file of this package. Because the json file contains potentially sensitive information, I don't recommend committing it to your git repository.
 
-Now that everything is set up on the API site, we’ll need to configure some things on the Google Calendar site. Head over Google Calendar and view the settings of the calendar you want to work with via PHP.  On the "Share with specific people" tab press the "Add people" button and add the service account id that was displayed when creating credentials on the API site. 
+Now that everything is set up on the API site, we’ll need to configure some things on the Google Calendar site. Head over to Google Calendar and view the settings of the calendar you want to work with via PHP.  On the "Share with specific people" tab press the "Add people" button and add the service account id that was displayed when creating credentials on the API site. 
 
 ![8](./docs/v2/8.png)
 
@@ -188,7 +188,7 @@ Event::create([
 ]);
 ```
 
-This will create an event with a specific start and end time. If you want to create a full day event you must use `startDate` and `endDate` instead of `startDateTime` and `endDateTime`.
+This will create an event with a specific start and end time. If you want to create a full-day event you must use `startDate` and `endDate` instead of `startDateTime` and `endDateTime`.
 
 ```php
 $event = new Event;
@@ -224,7 +224,7 @@ $event->name = 'My updated title';
 $event->save();
 ```
 
-Alternatively you can use the update method:
+Alternatively, you can use the update method:
 
 ```php
 $event = Event::find($eventId)
@@ -244,7 +244,7 @@ $event->delete();
 
 ### Limitations
 
-The Google Calendar API provides many options. This package doesn't support all of them. For instance recurring events cannot be managed properly with this package. If you stick to creating events with a name and a date you should be fine.
+The Google Calendar API provides many options. This package doesn't support all of them. For instance, recurring events cannot be managed properly with this package. If you stick to creating events with a name and a date you should be fine.
 
 ## Upgrading from v1 to v2
 
@@ -254,7 +254,7 @@ The only major difference between `v1` and `v2` is that under the hood Google AP
 
 ## Changelog
 
-Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+Please see [CHANGELOG](CHANGELOG.md) for more information about what has changed recently.
 
 ## Testing
 
@@ -268,7 +268,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## Security
 
-If you discover any security related issues, please email freek@spatie.be instead of using the issue tracker.
+If you discover any security-related issues, please email freek@spatie.be instead of using the issue tracker.
 
 ## Postcardware
 
