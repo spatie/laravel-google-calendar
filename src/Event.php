@@ -2,13 +2,13 @@
 
 namespace Spatie\GoogleCalendar;
 
-use DateTime;
 use Carbon\Carbon;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
+use DateTime;
 use Google_Service_Calendar_Event;
-use Illuminate\Support\Collection;
 use Google_Service_Calendar_EventDateTime;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class Event
 {
