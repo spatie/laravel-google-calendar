@@ -182,6 +182,11 @@ class Event
         return '';
     }
 
+    public function getCalendarId(): string
+    {
+        return $this->calendarId;
+    }
+
     protected static function getGoogleCalendar(string $calendarId = null): GoogleCalendar
     {
         $calendarId = $calendarId ?? config('google-calendar.calendar_id');
