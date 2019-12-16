@@ -68,9 +68,19 @@ class Event
 
         $googleEvents = $googleCalendar->listEvents($startDateTime, $endDateTime, $queryParameters);
 
+        $googleEventsList = $googleEvents->getItems();
+
+        while($googleEvents->getNextPageToken()) {
+            $queryParameters['pageToken'] = $googleEvents->getNextPageToken();
+
+            $googleEvents = $googleCalendar->listEvents($startDateTime, $endDateTime, $queryParameters);
+
+            $googleEventsList = array_merge($googleEventsList, $googleEvents->getItems());
+        }
+
         $useUserOrder = isset($queryParameters['orderBy']);
 
-        return collect($googleEvents)
+        return collect($googleEventsList)
             ->map(function (Google_Service_Calendar_Event $event) use ($calendarId) {
                 return static::createFromGoogleCalendarEvent($event, $calendarId);
             })
