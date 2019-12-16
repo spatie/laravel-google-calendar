@@ -70,7 +70,7 @@ class Event
 
         $googleEventsList = $googleEvents->getItems();
 
-        while($googleEvents->getNextPageToken()) {
+        while ($googleEvents->getNextPageToken()) {
             $queryParameters['pageToken'] = $googleEvents->getNextPageToken();
 
             $googleEvents = $googleCalendar->listEvents($startDateTime, $endDateTime, $queryParameters);
