@@ -2,6 +2,9 @@
 
 All notable changes to `laravel-google-calendar` will be documented in this file
 
+## 2.3.2 - 2019-12-16
+- Fixed fetching more than 250 results of calendar events (#133)
+
 ## 2.3.1 - 2019-12-15
 - Add getter for calendar ID per event (#131)
 
