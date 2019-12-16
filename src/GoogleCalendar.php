@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use DateTime;
 use Google_Service_Calendar;
 use Google_Service_Calendar_Event;
+use Google_Service_Calendar_Events;
 
 class GoogleCalendar
 {
@@ -30,7 +31,7 @@ class GoogleCalendar
     /*
      * @link https://developers.google.com/google-apps/calendar/v3/reference/events/list
      */
-    public function listEvents(Carbon $startDateTime = null, Carbon $endDateTime = null, array $queryParameters = []): array
+    public function listEvents(Carbon $startDateTime = null, Carbon $endDateTime = null, array $queryParameters = []): Google_Service_Calendar_Events
     {
         $parameters = [
             'singleEvents' => true,
@@ -53,8 +54,7 @@ class GoogleCalendar
         return $this
             ->calendarService
             ->events
-            ->listEvents($this->calendarId, $parameters)
-            ->getItems();
+            ->listEvents($this->calendarId, $parameters);
     }
 
     public function getEvent(string $eventId): Google_Service_Calendar_Event
