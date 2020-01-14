@@ -82,6 +82,14 @@ class EventTest extends TestCase
 
         $this->assertEquals('testname', $this->event->googleEvent['summary']);
     }
+    
+     /** @test */
+    public function it_can_set_a_description()
+    {
+        $this->event->description = 'Test Description';
+
+        $this->assertEquals('Test Description', $this->event->googleEvent['description']);
+    }
 
     /** @test */
     public function it_can_set_a_location()
