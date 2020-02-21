@@ -35,8 +35,14 @@ class GoogleCalendarServiceProvider extends ServiceProvider
             throw InvalidConfiguration::calendarIdNotSpecified();
         }
 
-        if (! file_exists($config['service_account_credentials_json'])) {
-            throw InvalidConfiguration::credentialsJsonDoesNotExist($config['service_account_credentials_json']);
+        $credentials = $config['service_account_credentials_json'];
+
+        if (! is_array($credentials) && ! is_string($credentials)) {
+            throw InvalidConfiguration::credentialsTypeWrong($credentials);
+        }
+
+        if (is_string($credentials) && ! file_exists($credentials)) {
+            throw InvalidConfiguration::credentialsJsonDoesNotExist($credentials);
         }
     }
 }
