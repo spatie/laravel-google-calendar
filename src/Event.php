@@ -3,6 +3,7 @@
 namespace Spatie\GoogleCalendar;
 
 use Carbon\Carbon;
+use Carbon\CarbonInterface;
 use DateTime;
 use Google_Service_Calendar_Event;
 use Google_Service_Calendar_EventDateTime;
@@ -62,7 +63,7 @@ class Event
         return $event->save('insertEvent', $optParams);
     }
 
-    public static function get(Carbon $startDateTime = null, Carbon $endDateTime = null, array $queryParameters = [], string $calendarId = null): Collection
+    public static function get(CarbonInterface $startDateTime = null, CarbonInterface $endDateTime = null, array $queryParameters = [], string $calendarId = null): Collection
     {
         $googleCalendar = static::getGoogleCalendar($calendarId);
 
