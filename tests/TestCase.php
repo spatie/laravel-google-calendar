@@ -13,7 +13,7 @@ abstract class TestCase extends OrchestraTestCase
     /** @var string */
     protected $calendarId;
 
-    protected function getPackageProviders($app) : array
+    protected function getPackageProviders($app): array
     {
         return [
             GoogleCalendarServiceProvider::class,

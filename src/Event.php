@@ -62,7 +62,7 @@ class Event
         return $event->save('insertEvent', $optParams);
     }
 
-    public static function get(Carbon $startDateTime = null, Carbon $endDateTime = null, array $queryParameters = [], string $calendarId = null) : Collection
+    public static function get(Carbon $startDateTime = null, Carbon $endDateTime = null, array $queryParameters = [], string $calendarId = null): Collection
     {
         $googleCalendar = static::getGoogleCalendar($calendarId);
 
@@ -230,12 +230,12 @@ class Event
     protected function getFieldName(string $name): string
     {
         return [
-                   'name' => 'summary',
-                   'description' => 'description',
-                   'startDate' => 'start.date',
-                   'endDate' => 'end.date',
-                   'startDateTime' => 'start.dateTime',
-                   'endDateTime' => 'end.dateTime',
-               ][$name] ?? $name;
+            'name' => 'summary',
+            'description' => 'description',
+            'startDate' => 'start.date',
+            'endDate' => 'end.date',
+            'startDateTime' => 'start.dateTime',
+            'endDateTime' => 'end.dateTime',
+        ][$name] ?? $name;
     }
 }
