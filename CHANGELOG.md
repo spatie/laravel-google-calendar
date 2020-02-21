@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-google-calendar` will be documented in this file
 
+## 2.4.0 - 2020-02-20
+
+- allow passing array of credentials (#139)
+
 ## 2.3.2 - 2019-12-16
 - Fixed fetching more than 250 results of calendar events (#133)
 
