@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-google-calendar` will be documented in this file
 
+## 2.5.0 - 2020-03-03
+
+- add support for Laravel 7
+
 ## 2.4.0 - 2020-02-20
 
 - allow passing array of credentials (#139)
