@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-google-calendar` will be documented in this file
 
+## 2.5.1 - 2020-04-01
+
+- allow usage of Carbon immutable (#141)
+
 ## 2.5.0 - 2020-03-03
 
 - add support for Laravel 7
