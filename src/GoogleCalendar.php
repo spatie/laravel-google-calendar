@@ -75,6 +75,14 @@ class GoogleCalendar
         return $this->calendarService->events->insert($this->calendarId, $event, $optParams);
     }
 
+    /*
+    * @link https://developers.google.com/calendar/v3/reference/events/quickAdd
+    */
+    public function insertEventFromText(string $event): Google_Service_Calendar_Event
+    {
+        return $this->calendarService->events->quickAdd($this->calendarId, $event);
+    }
+
     public function updateEvent($event): Google_Service_Calendar_Event
     {
         if ($event instanceof Event) {

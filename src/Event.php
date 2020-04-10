@@ -161,6 +161,15 @@ class Event
         return static::createFromGoogleCalendarEvent($googleEvent, $googleCalendar->getCalendarId());
     }
 
+    public function quickSave(string $event): self
+    {
+        $googleCalendar = $this->getGoogleCalendar($this->calendarId);
+
+        $googleEvent = $googleCalendar->insertEventFromText($event);
+
+        return static::createFromGoogleCalendarEvent($googleEvent, $googleCalendar->getCalendarId());
+    }
+
     public function update(array $attributes, $optParams = []): self
     {
         foreach ($attributes as $name => $value) {
