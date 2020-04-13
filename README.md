@@ -207,6 +207,17 @@ $event->endDate = Carbon\Carbon::now()->addDay();
 $event->save();
 ```
 
+Simply you can create an event based on a simple text string, too.
+
+```php
+$event = new Event();
+
+$event->quickSave('Appointment at Somewhere on April 25 10am-10:25am');
+
+// statically
+Event::quickCreate('Appointment at Somewhere on April 25 10am-10:25am');
+```
+
 ### Getting a single event
 
 Google assigns a unique id to every single event. You can get this id by getting events using the `get` method and getting the `id` property on a `Spatie\GoogleCalendar\Event`-object:
