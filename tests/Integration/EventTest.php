@@ -4,6 +4,7 @@ namespace Spatie\GoogleCalendar\Tests\Integration;
 
 use Carbon\Carbon;
 use DateTime;
+use Mockery as m;
 use Spatie\GoogleCalendar\Event;
 use Spatie\GoogleCalendar\Tests\TestCase;
 
@@ -111,5 +112,23 @@ class EventTest extends TestCase
         $event->startDateTime = Carbon::now();
 
         $this->assertFalse($event->isAllDayEvent());
+    }
+
+    /** @test */
+    public function it_can_create_an_event_based_on_a_text_string()
+    {
+        $event = m::mock(Event::class);
+        $event->shouldReceive('quickSave')->once()->with('Appointment at Somewhere on April 25 10am-10:25am');
+
+        $event->quickSave('Appointment at Somewhere on April 25 10am-10:25am');
+    }
+
+    /** @test */
+    public function it_can_create_an_event_based_on_a_text_string_statically()
+    {
+        $event = m::mock(Event::class);
+        $event->shouldReceive('quickCreate')->once()->with('Appointment at Somewhere on April 25 10am-10:25am');
+
+        $event::quickCreate('Appointment at Somewhere on April 25 10am-10:25am');
     }
 }

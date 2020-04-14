@@ -63,6 +63,15 @@ class Event
         return $event->save('insertEvent', $optParams);
     }
 
+    public static function quickCreate(string $text)
+    {
+        $event = new static;
+
+        $event->calendarId = static::getGoogleCalendar()->getCalendarId();
+
+        return $event->quickSave($text);
+    }
+
     public static function get(CarbonInterface $startDateTime = null, CarbonInterface $endDateTime = null, array $queryParameters = [], string $calendarId = null): Collection
     {
         $googleCalendar = static::getGoogleCalendar($calendarId);
@@ -157,6 +166,15 @@ class Event
         $this->googleEvent->setAttendees($this->attendees);
 
         $googleEvent = $googleCalendar->$method($this, $optParams);
+
+        return static::createFromGoogleCalendarEvent($googleEvent, $googleCalendar->getCalendarId());
+    }
+
+    public function quickSave(string $text): self
+    {
+        $googleCalendar = $this->getGoogleCalendar($this->calendarId);
+
+        $googleEvent = $googleCalendar->insertEventFromText($text);
 
         return static::createFromGoogleCalendarEvent($googleEvent, $googleCalendar->getCalendarId());
     }
