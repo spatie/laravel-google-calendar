@@ -207,7 +207,7 @@ $event->endDate = Carbon\Carbon::now()->addDay();
 $event->save();
 ```
 
-Simply you can create an event based on a simple text string, too.
+You can create an event based on a simple text string like this:
 
 ```php
 $event = new Event();
