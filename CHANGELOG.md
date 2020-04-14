@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-google-calendar` will be documented in this file
 
+## 2.5.2 - 2020-04-14
+
+- add quick save (#147)
+
 ## 2.5.1 - 2020-04-01
 
 - allow usage of Carbon immutable (#141)
