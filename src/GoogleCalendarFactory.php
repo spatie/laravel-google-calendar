@@ -7,18 +7,18 @@ use Google_Service_Calendar;
 
 class GoogleCalendarFactory
 {
-    public static function createForCalendarId(string $calendarId): GoogleCalendar
+    public static function createForCalendarId(string $calendarId, string $pathToCredentials): GoogleCalendar
     {
         $config = config('google-calendar');
 
-        $client = self::createAuthenticatedGoogleClient($config);
+        $client = self::createAuthenticatedGoogleClient($pathToCredentials);
 
         $service = new Google_Service_Calendar($client);
 
         return self::createCalendarClient($service, $calendarId);
     }
 
-    public static function createAuthenticatedGoogleClient(array $config): Google_Client
+    public static function createAuthenticatedGoogleClient($pathToCredentials): Google_Client
     {
         $client = new Google_Client;
 
@@ -26,7 +26,7 @@ class GoogleCalendarFactory
             Google_Service_Calendar::CALENDAR,
         ]);
 
-        $client->setAuthConfig($config['service_account_credentials_json']);
+        $client->setAuthConfig($pathToCredentials);
 
         return $client;
     }
