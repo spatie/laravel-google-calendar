@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-google-calendar` will be documented in this file
 
+## 2.6.0 - 2020-04-17
+
+- make factory more flexible
+
 ## 2.5.3 - 2020-04-17
 
 - make factory more flexible
