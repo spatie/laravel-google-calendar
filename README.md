@@ -61,25 +61,6 @@ You can install the package via composer:
 composer require spatie/laravel-google-calendar
 ```
 
-Next up the service provider must be registered:
-
-```php
-'providers' => [
-    ...
-    Spatie\GoogleCalendar\GoogleCalendarServiceProvider::class,
-];
-```
-
-Optionally the  `Spatie\GoogleCalendar\GoogleCalendarFacade` must be registered:
-
-```php
-'aliases' => [
-	...
-    'GoogleCalendar' => Spatie\GoogleCalendar\GoogleCalendarFacade::class,
-    ...
-]
-```
-
 You must publish the configuration with this command:
 
 ```bash
