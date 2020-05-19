@@ -15,5 +15,5 @@ return [
     /*
      *  The user e-mail of the Google Calendar that will be impersonated.
      */
-	'user_to_impersonate' => env('USER_TO_IMPERSONATE'),
+    'user_to_impersonate' => env('USER_TO_IMPERSONATE', ''),
 ];
