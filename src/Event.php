@@ -223,7 +223,7 @@ class Event
         return GoogleCalendarFactory::createForCalendarId($calendarId);
     }
 
-    protected function setDateProperty(string $name, Carbon $date)
+    protected function setDateProperty(string $name, CarbonInterface $date)
     {
         $eventDateTime = new Google_Service_Calendar_EventDateTime;
 
