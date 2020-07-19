@@ -2,7 +2,11 @@
 
 All notable changes to `laravel-google-calendar` will be documented in this file
 
-## 2.6.1 - 202-04-17
+## 2.6.2 - 2020-07-19
+
+- allow `CarbonImmutable` date (#160)
+
+## 2.6.1 - 2020-04-17
 
 - revert changes of previous release
 
