@@ -121,6 +121,13 @@ class Event
             return $this->getSortDate();
         }
 
+        if ($name === 'source') {
+            return array([
+                'title' => $this->googleEvent->getSource()->title,
+                'url' => $this->googleEvent->getSource()->url
+            ]);
+        }
+
         $value = Arr::get($this->googleEvent, $name);
 
         if (in_array($name, ['start.date', 'end.date']) && $value) {
@@ -140,6 +147,12 @@ class Event
 
         if (in_array($name, ['start.date', 'end.date', 'start.dateTime', 'end.dateTime'])) {
             $this->setDateProperty($name, $value);
+
+            return;
+        }
+
+        if ($name == 'source') {
+            $this->setSourceProperty($value);
 
             return;
         }
@@ -244,6 +257,16 @@ class Event
         if (Str::startsWith($name, 'end')) {
             $this->googleEvent->setEnd($eventDateTime);
         }
+    }
+
+    protected function setSourceProperty(array $value)
+    {
+        $source = new \Google_Service_Calendar_EventSource([
+            'title' => $value['title'],
+            'url' => $value['url']
+        ]);
+
+        $this->googleEvent->setSource($source);
     }
 
     protected function getFieldName(string $name): string
