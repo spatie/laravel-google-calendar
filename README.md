@@ -128,6 +128,26 @@ Scroll down to the "Integrate calendar" section to see the id of the calendar. Y
 
 ![10](./docs/v2/10.png)
 
+### Authentication with OAuth2
+
+This package now supports OAuth2 authentication, allowing you to authenticate with an actual Google account. This makes it possible to create and manage events with your own Google account rather than a separate service account. This also enables you to use source urls in your events, which are only visible to the creator of the event (see [docs](https://developers.google.com/calendar/v3/reference/events) for more on the source property).
+
+OAuth2 authentication requires a token file, in addition to the credentials file. The easiest way to generate both of these files is by using the [php quickstart tool](https://developers.google.com/calendar/quickstart/php). Following this guide will generate two files, `credentials.json` and `token.json`. They must be saved to your project as `oauth-credentials.json` and `oauth-token.json`, respectively. Check the config file in this package for exact details on where to save these files.
+
+To use OAuth2, you must also set a new environment variable in your .env file:
+
+```php
+GOOGLE_CALENDAR_AUTH_PROFILE=oauth
+```
+
+If you are upgrading from an older version of this package, you will need to force a publish of the configuration:
+
+```bash
+php artisan vendor:publish --provider="Spatie\GoogleCalendar\GoogleCalendarServiceProvider" --force
+```
+
+Finally, for a more seamless experience in your application, instead of using the quickstart tool you can set up a consent screen in the [Google API console](https://console.developers.google.com/apis). This would allow non-technical users of your application to easily generate their own tokens. This is completely optional.
+
 ## Usage
 
 ### Getting events
