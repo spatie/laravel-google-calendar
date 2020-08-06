@@ -39,11 +39,13 @@ class GoogleCalendarServiceProvider extends ServiceProvider
 
         if ($authProfile === 'service_account') {
             $this->validateServiceAccountConfigSettings($config);
+            
             return;
         }
 
         if ($authProfile === 'oauth') {
             $this->validateOAuthConfigSettings($config);
+
             return;
         }
 
