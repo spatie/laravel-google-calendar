@@ -22,7 +22,7 @@ class GoogleCalendarFactory
     {
         $authProfile = $config['default_auth_profile'];
 
-        switch($authProfile) {
+        switch ($authProfile) {
             case 'service_account':
                 return self::createServiceAccountClient($config['auth_profiles']['service_account']);
             case 'oauth':

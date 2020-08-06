@@ -103,10 +103,10 @@ class EventTest extends TestCase
     /** @test */
     public function it_can_set_a_source()
     {
-        $this->event->source = array(
+        $this->event->source = [
             'title' => 'Test Source Title',
-            'url' => 'http://testsource.url'
-        );
+            'url' => 'http://testsource.url',
+        ];
 
         $this->assertEquals('Test Source Title', $this->event->googleEvent->getSource()->title);
         $this->assertEquals('http://testsource.url', $this->event->googleEvent->getSource()->url);

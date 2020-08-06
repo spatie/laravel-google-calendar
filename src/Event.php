@@ -122,10 +122,10 @@ class Event
         }
 
         if ($name === 'source') {
-            return array([
+            return [
                 'title' => $this->googleEvent->getSource()->title,
-                'url' => $this->googleEvent->getSource()->url
-            ]);
+                'url' => $this->googleEvent->getSource()->url,
+            ];
         }
 
         $value = Arr::get($this->googleEvent, $name);
@@ -263,7 +263,7 @@ class Event
     {
         $source = new \Google_Service_Calendar_EventSource([
             'title' => $value['title'],
-            'url' => $value['url']
+            'url' => $value['url'],
         ]);
 
         $this->googleEvent->setSource($source);
