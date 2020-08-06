@@ -130,7 +130,7 @@ Scroll down to the "Integrate calendar" section to see the id of the calendar. Y
 
 ### Authentication with OAuth2
 
-This package now supports OAuth2 authentication, allowing you to authenticate with an actual Google account. This makes it possible to create and manage events with your own Google account rather than a separate service account. This also enables you to use source urls in your events, which are only visible to the creator of the event (see [docs](https://developers.google.com/calendar/v3/reference/events) for more on the source property).
+This package supports OAuth2 authentication. This allows you to authenticate with an actual Google account, and to create and manage events with your own Google account.
 
 OAuth2 authentication requires a token file, in addition to the credentials file. The easiest way to generate both of these files is by using the [php quickstart tool](https://developers.google.com/calendar/quickstart/php). Following this guide will generate two files, `credentials.json` and `token.json`. They must be saved to your project as `oauth-credentials.json` and `oauth-token.json`, respectively. Check the config file in this package for exact details on where to save these files.
 
@@ -263,6 +263,17 @@ $event = Event::find($eventId);
 
 $event->delete();
 ```
+
+## Setting a source
+
+You can set source urls in your events, which are only visible to the creator of the event (see [docs](https://developers.google.com/calendar/v3/reference/events) for more on the source property). This function only works when authenticated via OAuth.
+
+```php
+$yourEvent->source = [
+   'title' => 'Test Source Title',
+   'url' => 'http://testsource.url',
+ ];
+ ```
 
 ### Limitations
 
