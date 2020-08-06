@@ -60,7 +60,6 @@ class GoogleCalendarFactory
         return $client;
     }
 
-
     protected static function createCalendarClient(Google_Service_Calendar $service, string $calendarId): GoogleCalendar
     {
         return new GoogleCalendar($service, $calendarId);
