@@ -7,6 +7,7 @@ use Carbon\CarbonInterface;
 use DateTime;
 use Google_Service_Calendar_Event;
 use Google_Service_Calendar_EventDateTime;
+use Google_Service_Calendar_EventSource;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -261,7 +262,7 @@ class Event
 
     protected function setSourceProperty(array $value)
     {
-        $source = new \Google_Service_Calendar_EventSource([
+        $source = new Google_Service_Calendar_EventSource([
             'title' => $value['title'],
             'url' => $value['url'],
         ]);

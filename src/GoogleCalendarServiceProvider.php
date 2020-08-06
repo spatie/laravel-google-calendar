@@ -37,16 +37,17 @@ class GoogleCalendarServiceProvider extends ServiceProvider
 
         $authProfile = $config['default_auth_profile'];
 
-        switch ($authProfile) {
-            case 'service_account':
-                $this->validateServiceAccountConfigSettings($config);
-                break;
-            case 'oauth':
-                $this->validateOAuthConfigSettings($config);
-                break;
-            default:
-                throw new \InvalidArgumentException("Unsupported authentication profile [{$authProfile}].");
+        if ($authProfile === 'service_account') {
+            $this->validateServiceAccountConfigSettings($config);
+            return;
         }
+
+        if ($authProfile === 'oauth') {
+            $this->validateOAuthConfigSettings($config);
+            return;
+        }
+
+        throw InvalidConfiguration::invalidAuthenticationProfile($authProfile);
     }
 
     protected function validateServiceAccountConfigSettings(array $config = null)

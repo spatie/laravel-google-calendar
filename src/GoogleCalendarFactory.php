@@ -4,6 +4,7 @@ namespace Spatie\GoogleCalendar;
 
 use Google_Client;
 use Google_Service_Calendar;
+use Spatie\GoogleCalendar\Exceptions\InvalidConfiguration;
 
 class GoogleCalendarFactory
 {
@@ -22,14 +23,14 @@ class GoogleCalendarFactory
     {
         $authProfile = $config['default_auth_profile'];
 
-        switch ($authProfile) {
-            case 'service_account':
-                return self::createServiceAccountClient($config['auth_profiles']['service_account']);
-            case 'oauth':
-                return self::createOAuthClient($config['auth_profiles']['oauth']);
+        if ($authProfile === 'service_account') {
+            return self::createServiceAccountClient($config['auth_profiles']['service_account']);
+        }
+        if ($authProfile === 'oauth') {
+            return self::createOAuthClient($config['auth_profiles']['oauth']);
         }
 
-        throw new \InvalidArgumentException("Unsupported authentication profile [{$authProfile}].");
+        throw InvalidConfiguration::invalidAuthenticationProfile($authProfile);
     }
 
     protected static function createServiceAccountClient(array $authProfile): Google_Client
