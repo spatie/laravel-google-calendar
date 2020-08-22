@@ -101,6 +101,18 @@ class EventTest extends TestCase
     }
 
     /** @test */
+    public function it_can_set_a_source()
+    {
+        $this->event->source = [
+            'title' => 'Test Source Title',
+            'url' => 'http://testsource.url',
+        ];
+
+        $this->assertEquals('Test Source Title', $this->event->googleEvent->getSource()->title);
+        $this->assertEquals('http://testsource.url', $this->event->googleEvent->getSource()->url);
+    }
+
+    /** @test */
     public function it_can_determine_if_an_event_is_an_all_day_event()
     {
         $event = new Event;
