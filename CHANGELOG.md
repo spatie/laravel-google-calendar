@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-google-calendar` will be documented in this file
 
+## 3.0.0 - 2020-08-24
+
+- add support for OAuth2 authentication, source property on events (#163)
+
 ## 2.6.2 - 2020-07-19
 
 - allow `CarbonImmutable` date (#160)
