@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-google-calendar` will be documented in this file
 
+## 3.1.0 - 2020-09-08
+
+- add support for Laravel 8
+
 ## 3.0.0 - 2020-08-24
 
 - add support for OAuth2 authentication, source property on events (#163)
