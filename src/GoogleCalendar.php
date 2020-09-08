@@ -36,7 +36,7 @@ class GoogleCalendar
     {
         $parameters = [
             'singleEvents' => true,
-            'orderBy' => 'startTime',
+            'orderBy'      => 'startTime',
         ];
 
         if (is_null($startDateTime)) {

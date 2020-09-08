@@ -26,7 +26,7 @@ class Event
     public function __construct()
     {
         $this->attendees = [];
-        $this->googleEvent = new Google_Service_Calendar_Event;
+        $this->googleEvent = new Google_Service_Calendar_Event();
     }
 
     /**
@@ -37,7 +37,7 @@ class Event
      */
     public static function createFromGoogleCalendarEvent(Google_Service_Calendar_Event $googleEvent, $calendarId)
     {
-        $event = new static;
+        $event = new static();
 
         $event->googleEvent = $googleEvent;
         $event->calendarId = $calendarId;
@@ -46,14 +46,14 @@ class Event
     }
 
     /**
-     * @param array $properties
+     * @param array       $properties
      * @param string|null $calendarId
      *
      * @return mixed
      */
     public static function create(array $properties, string $calendarId = null, $optParams = [])
     {
-        $event = new static;
+        $event = new static();
 
         $event->calendarId = static::getGoogleCalendar($calendarId)->getCalendarId();
 
@@ -66,7 +66,7 @@ class Event
 
     public static function quickCreate(string $text)
     {
-        $event = new static;
+        $event = new static();
 
         $event->calendarId = static::getGoogleCalendar()->getCalendarId();
 
@@ -125,7 +125,7 @@ class Event
         if ($name === 'source') {
             return [
                 'title' => $this->googleEvent->getSource()->title,
-                'url' => $this->googleEvent->getSource()->url,
+                'url'   => $this->googleEvent->getSource()->url,
             ];
         }
 
@@ -239,7 +239,7 @@ class Event
 
     protected function setDateProperty(string $name, CarbonInterface $date)
     {
-        $eventDateTime = new Google_Service_Calendar_EventDateTime;
+        $eventDateTime = new Google_Service_Calendar_EventDateTime();
 
         if (in_array($name, ['start.date', 'end.date'])) {
             $eventDateTime->setDate($date->format('Y-m-d'));
@@ -264,7 +264,7 @@ class Event
     {
         $source = new Google_Service_Calendar_EventSource([
             'title' => $value['title'],
-            'url' => $value['url'],
+            'url'   => $value['url'],
         ]);
 
         $this->googleEvent->setSource($source);
@@ -273,12 +273,12 @@ class Event
     protected function getFieldName(string $name): string
     {
         return [
-            'name' => 'summary',
-            'description' => 'description',
-            'startDate' => 'start.date',
-            'endDate' => 'end.date',
+            'name'          => 'summary',
+            'description'   => 'description',
+            'startDate'     => 'start.date',
+            'endDate'       => 'end.date',
             'startDateTime' => 'start.dateTime',
-            'endDateTime' => 'end.dateTime',
+            'endDateTime'   => 'end.dateTime',
         ][$name] ?? $name;
     }
 }

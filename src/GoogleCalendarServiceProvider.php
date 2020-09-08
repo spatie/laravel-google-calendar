@@ -72,11 +72,11 @@ class GoogleCalendarServiceProvider extends ServiceProvider
 
     protected function validateConfigSetting(string $setting)
     {
-        if (! is_array($setting) && ! is_string($setting)) {
+        if (!is_array($setting) && !is_string($setting)) {
             throw InvalidConfiguration::credentialsTypeWrong($setting);
         }
 
-        if (is_string($setting) && ! file_exists($setting)) {
+        if (is_string($setting) && !file_exists($setting)) {
             throw InvalidConfiguration::credentialsJsonDoesNotExist($setting);
         }
     }
