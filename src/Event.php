@@ -37,6 +37,16 @@ class Event
      */
     public static function createFromGoogleCalendarEvent(Google_Service_Calendar_Event $googleEvent, $calendarId)
     {
+        //this option are to create a conference and add a link to meet in event
+        $googleCalendar = static::getGoogleCalendar($calendarId);
+        $service = $googleCalendar->getService();
+        $conference = new \Google_Service_Calendar_ConferenceData();
+        $conferenceRequest = new \Google_Service_Calendar_CreateConferenceRequest();
+        $conferenceRequest->setRequestId('randomString123');
+        $conference->setCreateRequest($conferenceRequest);
+        $googleEvent->setConferenceData($conference);
+        $googleEvent = $service->events->patch($calendarId, $googleEvent->id, $googleEvent, ['conferenceDataVersion' => 1]);
+
         $event = new static;
 
         $event->googleEvent = $googleEvent;
