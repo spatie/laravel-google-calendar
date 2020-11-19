@@ -119,9 +119,9 @@ class EventTest extends TestCase
             [
                 'name' => 'Spatie',
                 'email' => 'spatie@example.com',
-                'comment' => "I'm ready for this meeting"
+                'comment' => "I'm ready for this meeting",
             ],
-            [ 'email' => 'devgummibeer@example.com' ]
+            [ 'email' => 'devgummibeer@example.com' ],
         ];
 
         $this->event->addAttendee($attendees[0]);
