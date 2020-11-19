@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Carbon\CarbonInterface;
 use DateTime;
 use Google_Service_Calendar_Event;
+use Google_Service_Calendar_EventAttendee;
 use Google_Service_Calendar_EventDateTime;
 use Google_Service_Calendar_EventSource;
 use Illuminate\Support\Arr;
@@ -177,8 +178,6 @@ class Event
 
         $googleCalendar = $this->getGoogleCalendar($this->calendarId);
 
-        $this->googleEvent->setAttendees($this->attendees);
-
         $googleEvent = $googleCalendar->$method($this, $optParams);
 
         return static::createFromGoogleCalendarEvent($googleEvent, $googleCalendar->getCalendarId());
@@ -207,9 +206,15 @@ class Event
         $this->getGoogleCalendar($this->calendarId)->deleteEvent($eventId ?? $this->id);
     }
 
-    public function addAttendee(array $attendees)
+    public function addAttendee(array $attendee)
     {
-        $this->attendees[] = $attendees;
+        $this->attendees[] = new Google_Service_Calendar_EventAttendee([
+            'email' => $attendee['email'],
+            'comment' => $attendee['comment'] ?? null,
+            'displayName' => $attendee['name'] ?? null,
+        ]);
+
+        $this->googleEvent->setAttendees($this->attendees);
     }
 
     public function getSortDate(): string
@@ -274,7 +279,6 @@ class Event
     {
         return [
             'name' => 'summary',
-            'description' => 'description',
             'startDate' => 'start.date',
             'endDate' => 'end.date',
             'startDateTime' => 'start.dateTime',
