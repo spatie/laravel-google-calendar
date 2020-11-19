@@ -113,6 +113,29 @@ class EventTest extends TestCase
     }
 
     /** @test */
+    public function it_can_set_multiple_attendees()
+    {
+        $attendees = [
+            [
+                'name' => 'Spatie',
+                'email' => 'spatie@example.com',
+                'comment' => "I'm ready for this meeting"
+            ],
+            [ 'email' => 'devgummibeer@example.com' ]
+        ];
+
+        $this->event->addAttendee($attendees[0]);
+        $this->event->addAttendee($attendees[1]);
+
+        $this->assertCount(2, $this->event->googleEvent->getAttendees());
+        $this->assertInstanceOf(\Google_Service_Calendar_EventAttendee::class, $this->event->googleEvent->getAttendees()[0]);
+        $this->assertEquals($attendees[0]['email'], $this->event->googleEvent->getAttendees()[0]->getEmail());
+        $this->assertEquals($attendees[0]['name'], $this->event->googleEvent->getAttendees()[0]->getDisplayName());
+        $this->assertEquals($attendees[0]['comment'], $this->event->googleEvent->getAttendees()[0]->getComment());
+        $this->assertEquals($attendees[1]['email'], $this->event->googleEvent->getAttendees()[1]->getEmail());
+    }
+
+    /** @test */
     public function it_can_determine_if_an_event_is_an_all_day_event()
     {
         $event = new Event;

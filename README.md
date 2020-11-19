@@ -15,9 +15,14 @@ use Spatie\GoogleCalendar\Event;
 $event = new Event;
 
 $event->name = 'A new event';
+$event->description = 'Event description';
 $event->startDateTime = Carbon\Carbon::now();
 $event->endDateTime = Carbon\Carbon::now()->addHour();
-$event->addAttendee(['email' => 'youremail@gmail.com']);
+$event->addAttendee([
+    'comment' => "I'm super impressed",
+    'name' => 'Spatie',
+    'email' => 'youremail@gmail.com'
+]);
 $event->addAttendee(['email' => 'anotherEmail@gmail.com']);
 
 $event->save();
