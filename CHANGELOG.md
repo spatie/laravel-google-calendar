@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-google-calendar` will be documented in this file
 
+## 3.2.1 - 2020-12-07
+
+- add support PHP 8
+
 ## 3.2.0 - 2020-11-19
 
 - add support for adding attendees to events (#178)
