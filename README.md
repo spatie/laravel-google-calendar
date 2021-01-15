@@ -110,6 +110,11 @@ return [
      *  The id of the Google Calendar that will be used by default.
      */
     'calendar_id' => env('GOOGLE_CALENDAR_ID'),
+
+    /*
+     *  The email address of the user account to impersonate.
+     */
+    'user_to_impersonate' => env('GOOGLE_CALENDAR_IMPERSONATE'),
 ];
 
 ```
@@ -142,11 +147,13 @@ From this page, open the "Create credentials" drop-down and select "Service acco
 
 On the next screen, you can give the service account a name. You can name it anything you’d like. In the service account id you’ll see an email address. We’ll use this email address later on in this guide. Select "JSON" as the key type and click "Create" to download the JSON file. You will get a warning that the service account does not have a role, you can safely ignore this and create the service account without assigning a role.
 
+If you have delegated domain-wide access to the service account and you want to impersonate a user account, specify the email address of the user account in the config file.
+
 ![7](./docs/v2/7.png)
 
 Save the json inside your Laravel project at the location specified in the `service_account_credentials_json` key of the config file of this package. Because the json file contains potentially sensitive information, I don't recommend committing it to your git repository.
 
-Now that everything is set up on the API site, we’ll need to configure some things on the Google Calendar site. Head over to Google Calendar and view the settings of the calendar you want to work with via PHP.  On the "Share with specific people" tab press the "Add people" button and add the service account id that was displayed when creating credentials on the API site. 
+Now that everything is set up on the API site, we’ll need to configure some things on the Google Calendar site. Head over to Google Calendar and view the settings of the calendar you want to work with via PHP.  On the "Share with specific people" tab press the "Add people" button and add the service account id that was displayed when creating credentials on the API site.
 
 ![8](./docs/v2/8.png)
 
