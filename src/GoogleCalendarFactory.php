@@ -77,4 +77,9 @@ class GoogleCalendarFactory
     {
         return new GoogleCalendar($service, $calendarId);
     }
+    
+    protected static function createResourceClient(Google_Service_Directory $service): Resource
+    {
+        return new Resource($service);
+    }
 }
