@@ -25,7 +25,12 @@ class GoogleCalendarServiceProvider extends ServiceProvider
 
             return GoogleCalendarFactory::createForCalendarId($config['calendar_id']);
         });
+        
+        $this->app->bind(Resource::class, function () {
 
+            return GoogleCalendarFactory::createForResources();
+        });
+    }
         $this->app->alias(GoogleCalendar::class, 'laravel-google-calendar');
     }
 
