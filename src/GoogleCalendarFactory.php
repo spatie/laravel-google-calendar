@@ -51,7 +51,10 @@ class GoogleCalendarFactory
 
         $client->setScopes([
             Google_Service_Calendar::CALENDAR,
+            Google_Service_Directory::ADMIN_DIRECTORY_RESOURCE_CALENDAR_READONLY,
         ]);
+        $client->setApplicationName(env('APP_NAME'));
+        $client->setSubject(env('IMPERSONATE'));
 
         $client->setAuthConfig($authProfile['credentials_json']);
 
