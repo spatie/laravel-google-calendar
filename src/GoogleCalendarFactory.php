@@ -4,6 +4,7 @@ namespace Spatie\GoogleCalendar;
 
 use Google_Client;
 use Google_Service_Calendar;
+use Google_Service_Directory;
 use Spatie\GoogleCalendar\Exceptions\InvalidConfiguration;
 
 class GoogleCalendarFactory
@@ -19,6 +20,17 @@ class GoogleCalendarFactory
         return self::createCalendarClient($service, $calendarId);
     }
 
+    public static function createForResources(): Resource
+    {
+        $config = config('google-calendar');
+
+        $client = self::createAuthenticatedGoogleClient($config);
+
+        $service = new Google_Service_Directory($client);
+
+        return self::createResourceClient($service);
+    }
+    
     public static function createAuthenticatedGoogleClient(array $config): Google_Client
     {
         $authProfile = $config['default_auth_profile'];
