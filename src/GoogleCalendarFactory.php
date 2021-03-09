@@ -54,7 +54,7 @@ class GoogleCalendarFactory
             Google_Service_Directory::ADMIN_DIRECTORY_RESOURCE_CALENDAR_READONLY,
         ]);
         $client->setApplicationName(env('APP_NAME'));
-        $client->setSubject(env('IMPERSONATE'));
+        $client->setSubject($authProfile['impersonation']);
 
         $client->setAuthConfig($authProfile['credentials_json']);
 
