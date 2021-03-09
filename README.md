@@ -24,6 +24,7 @@ $event->addAttendee([
     'comment' => 'Lorum ipsum',
 ]);
 $event->addAttendee(['email' => 'anotherEmail@gmail.com']);
+$event->recurrence = 'RRULE:' . (new RRule\RRule($rrule_array)->rfcString());
 
 $event->save();
 
@@ -305,7 +306,60 @@ $yourEvent->source = [
 
 ### Limitations
 
-The Google Calendar API provides many options. This package doesn't support all of them. For instance, recurring events cannot be managed properly with this package. If you stick to creating events with a name and a date you should be fine.
+The Google Calendar API provides many options. This package doesn't support all of them. For instance, recurring events cannot be managed properly with this package. If you stick to creating events with a name and a date you should be fine. You can manage your recurring events using another package. This is implemented native by Google however you'll need the package RRule\RRule to parse it.
+```
+        $event = Event::find('EVENT_ID_WITH_RECURRING','CALENDAR_ID');
+        $rrule = new RRule($event->recurrence[0]);
+```
+To create a recurring event, you'll need to parse it with these instructions:
+```
+$rrule = new RRule('DTSTART;TZID=America/New_York:19970901T090000
+       RRULE:FREQ=WEEKLY;INTERVAL=2;UNTIL=19971224T000000Z;WKST=SU;BYDAY=MO,WE,FR');
+$event->recurrence=$rrule->rfcString();
+```
+
+## Google Workspace Resources
+
+Google Workspace accounts may enable meeting rooms and subsequently the resource accompanied with it. These resources are visualized as a mix between a location and an attendee of an event. 
+By adding the emailaddress of the room to the attendees methods you can book rooms. Please be aware you'll need to configure this in the admin console and delegate 'ADMIN_DIRECTORY_RESOURCE_CALENDAR_READONLY' privileges to your account with impersonation to one specific account of your domain.  
+
+```
+use Spatie\GoogleCalendar\Resource;
+$resourceArray=Resource::get();
+print_r($resourceArray);
+
+```
+results in a simple array of properties:
+
+```
+Array
+(
+    [0] => Array
+        (
+            [name] => NameOfTheRoom
+            [id] => somerandomid
+            [generatedname] => Building-Floorname-Floorsection-NameofTheRoom (Capacity)
+            [capacity] => 100
+            [floorname] => Basement
+            [floorsection] => BuildingA 
+            [features] => Array
+                (
+                    [0] => Array
+                        (
+                            [feature] => Array
+                                (
+                                    [kind] => admin#directory#resources#features#Feature
+                                    [etags] => "somerandomid"
+                                    [name] => ConferenceCallDevice
+                                )
+
+                        )
+
+                )
+
+            [email] => domain_randomid@resource.calendar.google.com
+        )
+```
 
 ## Upgrading from v1 to v2
 
