@@ -92,13 +92,13 @@ class GoogleCalendar
         return $this->calendarService->events->update($this->calendarId, $event->id, $event, $optParams);
     }
 
-    public function deleteEvent($eventId)
+    public function deleteEvent($eventId, $optParams = [])
     {
         if ($eventId instanceof Event) {
             $eventId = $eventId->id;
         }
 
-        $this->calendarService->events->delete($this->calendarId, $eventId);
+        $this->calendarService->events->delete($this->calendarId, $eventId, $optParams);
     }
 
     public function getService(): Google_Service_Calendar
