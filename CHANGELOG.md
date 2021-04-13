@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-google-calendar` will be documented in this file
 
+## 3.3.0 - 2021-04-13
+
+- allow user to pass in optional parameters to `updateEvent` (#199)
+
 ## 3.2.1 - 2020-12-07
 
 - add support PHP 8
