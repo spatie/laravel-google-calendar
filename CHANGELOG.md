@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-google-calendar` will be documented in this file
 
+## 3.3.1 - 2021-04-13
+
+- allow optional parameters on delete (#200)
+
 ## 3.3.0 - 2021-04-13
 
 - allow user to pass in optional parameters to `updateEvent` (#199)
