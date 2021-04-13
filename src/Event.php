@@ -201,9 +201,9 @@ class Event
         return $this->save('updateEvent', $optParams);
     }
 
-    public function delete(string $eventId = null)
+    public function delete(string $eventId = null, $optParams = [])
     {
-        $this->getGoogleCalendar($this->calendarId)->deleteEvent($eventId ?? $this->id);
+        $this->getGoogleCalendar($this->calendarId)->deleteEvent($eventId ?? $this->id, $optParams);
     }
 
     public function addAttendee(array $attendee)
