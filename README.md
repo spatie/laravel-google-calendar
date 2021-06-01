@@ -19,7 +19,7 @@ $event->description = 'Event description';
 $event->startDateTime = Carbon\Carbon::now();
 $event->endDateTime = Carbon\Carbon::now()->addHour();
 $event->addAttendee([
-    'email' => 'john@example.com'
+    'email' => 'john@example.com',
     'name' => 'John Doe',
     'comment' => 'Lorum ipsum',
 ]);
