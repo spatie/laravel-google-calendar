@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-google-calendar` will be documented in this file
 
+## 3.4.0 - 2021-09-27
+
+- Domain-wide delegation support (#230)
+
 ## 3.3.1 - 2021-04-13
 
 - allow optional parameters on delete (#200)
