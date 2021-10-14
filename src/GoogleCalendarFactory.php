@@ -5,6 +5,7 @@ namespace Spatie\GoogleCalendar;
 use Google_Client;
 use Google_Service_Calendar;
 use Spatie\GoogleCalendar\Exceptions\InvalidConfiguration;
+use Illuminate\Support\Facades\Auth;
 
 class GoogleCalendarFactory
 {
@@ -28,6 +29,9 @@ class GoogleCalendarFactory
         }
         if ($authProfile === 'oauth') {
             return self::createOAuthClient($config['auth_profiles']['oauth']);
+        }
+        if ($authProfile === 'user_oauth') {
+            return self::createOAuthClientFromAuth($config['auth_profiles']['user_oauth']);
         }
 
         throw InvalidConfiguration::invalidAuthenticationProfile($authProfile);
@@ -61,6 +65,23 @@ class GoogleCalendarFactory
         $client->setAuthConfig($authProfile['credentials_json']);
 
         $client->setAccessToken(file_get_contents($authProfile['token_json']));
+
+        return $client;
+    }
+
+    protected static function createOAuthClientFromAuth(array $authProfile): Google_Client
+    {
+        $client = new Google_Client;
+
+        $client->setScopes([
+            Google_Service_Calendar::CALENDAR,
+        ]);
+
+        $client->setAuthConfig($authProfile['credentials_json']);
+
+        $user_token = Auth::guard($authProfile['guard'])->user()->{$authProfile['column']};
+
+        $client->setAccessToken($user_token);
 
         return $client;
     }

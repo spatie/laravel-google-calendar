@@ -30,6 +30,26 @@ return [
              */
             'token_json' => storage_path('app/google-calendar/oauth-token.json'),
         ],
+
+        /*
+         * Authenticate with user's stored token.
+         */
+        'user_oauth' => [
+            /*
+             * Path to the json file containing the oauth2 credentials.
+             */
+            'credentials_json' => storage_path('app/google-calendar/oauth-credentials.json'),
+
+            /*
+             * Auth guard.
+             */
+            'guard' => 'web',
+
+            /*
+             * Column stored calendar token.
+             */
+            'column' => 'calendar_token',
+        ],
     ],
 
     /*
