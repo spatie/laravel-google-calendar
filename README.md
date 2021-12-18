@@ -262,7 +262,7 @@ $eventId = Event::get()->first()->id;
 // you can also get the id after creating the event, then you can save it to database.
 $event = new Event;
 $newEvent = $event->save();
-dd($newEvent->id); // e.g "s663g0m8crhnrpfh5eplqtd2ac"
+echo $newEvent->id; // displey the event id
 ```
 
 You can use this id to fetch a single event from Google:
