@@ -258,6 +258,11 @@ Google assigns a unique id to every single event. You can get this id by getting
 ```php
 // get the id of the first upcoming event in the calendar.
 $eventId = Event::get()->first()->id;
+
+// you can also get the id after creating the event, then you can save it to database.
+$event = new Event;
+$newEvent = $event->save();
+dd($newEvent->id); // e.g "s663g0m8crhnrpfh5eplqtd2ac"
 ```
 
 You can use this id to fetch a single event from Google:
