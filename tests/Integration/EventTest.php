@@ -166,4 +166,14 @@ class EventTest extends TestCase
 
         $event::quickCreate('Appointment at Somewhere on April 25 10am-10:25am');
     }
+
+    /** @test */
+    public function it_can_set_a_timezone_that_is_a_string()
+    {
+        $now = Carbon::now()->setTimezone('Indian/Reunion');
+
+        $this->event->endDateTime = $now;
+
+        $this->assertEquals((string) $now->getTimezone(), 'Indian/Reunion');
+    }
 }
