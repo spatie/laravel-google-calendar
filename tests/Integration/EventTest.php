@@ -85,6 +85,14 @@ class EventTest extends TestCase
     }
 
     /** @test */
+    public function it_can_set_a_color()
+    {
+        $this->event->colorId = 11;
+
+        $this->assertEquals(11, $this->event->googleEvent['colorId']);
+    }
+
+    /** @test */
     public function it_can_set_a_description()
     {
         $this->event->description = 'Test Description';
