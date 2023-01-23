@@ -313,7 +313,7 @@ $yourEvent->source = [
  ];
  ```
 
-### Setting a color
+## Setting a color
 
 You can set certain colors for your events. The possibilities are limited to the color definitions of the Google Calendar API. You can find them [here](https://developers.google.com/calendar/api/v3/reference/colors/get).
 
