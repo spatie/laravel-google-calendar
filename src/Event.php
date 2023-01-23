@@ -275,6 +275,11 @@ class Event
         $this->googleEvent->setSource($source);
     }
 
+    public function setColorId(int $id)
+    {
+        $this->googleEvent->setColorId($id);
+    }
+
     protected function getFieldName(string $name): string
     {
         return [

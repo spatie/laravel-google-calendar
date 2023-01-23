@@ -313,6 +313,14 @@ $yourEvent->source = [
  ];
  ```
 
+## Setting a color
+
+You can set certain colors for your events (colorId 1 to 11). The possibilities are limited to the color definitions of the Google Calendar API. You can find them [here](https://developers.google.com/calendar/api/v3/reference/colors/get).
+
+```php
+$yourevent->setColorId(11);
+```
+
 ### Limitations
 
 The Google Calendar API provides many options. This package doesn't support all of them. For instance, recurring events cannot be managed properly with this package. If you stick to creating events with a name and a date you should be fine.
