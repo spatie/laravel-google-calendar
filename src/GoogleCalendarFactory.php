@@ -8,18 +8,18 @@ use Spatie\GoogleCalendar\Exceptions\InvalidConfiguration;
 
 class GoogleCalendarFactory
 {
-    public static function createForCalendarId(string $calendarId): GoogleCalendar
+    public static function createForCalendarId(string $calendarId,$apiSecretToken,$userToken): GoogleCalendar
     {
         $config = config('google-calendar');
 
-        $client = self::createAuthenticatedGoogleClient($config);
+        $client = self::createAuthenticatedGoogleClient($config,$apiSecretToken,$userToken);
 
         $service = new Google_Service_Calendar($client);
 
-        return self::createCalendarClient($service, $calendarId);
+        return self::createCalendarClient($service, $calendarId,$apiSecretToken,$userToken);
     }
 
-    public static function createAuthenticatedGoogleClient(array $config): Google_Client
+    public static function createAuthenticatedGoogleClient(array $config,string $apiSecretToken,string $userToken): Google_Client
     {
         $authProfile = $config['default_auth_profile'];
 
@@ -27,7 +27,7 @@ class GoogleCalendarFactory
             return self::createServiceAccountClient($config['auth_profiles']['service_account']);
         }
         if ($authProfile === 'oauth') {
-            return self::createOAuthClient($config['auth_profiles']['oauth']);
+            return self::createOAuthClient($apiSecretToken,$userToken);
         }
 
         throw InvalidConfiguration::invalidAuthenticationProfile($authProfile);
@@ -50,7 +50,7 @@ class GoogleCalendarFactory
         return $client;
     }
 
-    protected static function createOAuthClient(array $authProfile): Google_Client
+    protected static function createOAuthClient(string $apiSecretToken, string $userToken): Google_Client
     {
         $client = new Google_Client;
 
@@ -58,15 +58,15 @@ class GoogleCalendarFactory
             Google_Service_Calendar::CALENDAR,
         ]);
 
-        $client->setAuthConfig($authProfile['credentials_json']);
+        $client->setAuthConfig($apiSecretToken);
 
-        $client->setAccessToken(file_get_contents($authProfile['token_json']));
+        $client->setAccessToken(file_get_contents($userToken));
 
         return $client;
     }
 
-    protected static function createCalendarClient(Google_Service_Calendar $service, string $calendarId): GoogleCalendar
+    protected static function createCalendarClient(Google_Service_Calendar $service, string $calendarId,string $apiSecretToken,string $userToken): GoogleCalendar
     {
-        return new GoogleCalendar($service, $calendarId);
+        return new GoogleCalendar($service, $calendarId,$apiSecretToken,$userToken);
     }
 }

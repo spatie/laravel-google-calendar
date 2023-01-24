@@ -17,16 +17,34 @@ class GoogleCalendar
     /** @var string */
     protected $calendarId;
 
-    public function __construct(Google_Service_Calendar $calendarService, string $calendarId)
+     /** @var string */
+    protected $apiSecretToken;
+
+     /** @var string */
+    protected $userToken;
+
+    public function __construct(Google_Service_Calendar $calendarService, string $calendarId,string $apiSecretToken,$userToken)
     {
         $this->calendarService = $calendarService;
 
         $this->calendarId = $calendarId;
+        $this->apiSecretToken = $apiSecretToken;
+        $this->userToken = $userToken;
     }
 
     public function getCalendarId(): string
     {
         return $this->calendarId;
+    }
+
+    public function getApiSecretToken(): string
+    {
+        return $this->apiSecretToken;
+    }
+
+    public function getUserToken(): string
+    {
+        return $this->userToken;
     }
 
     /*

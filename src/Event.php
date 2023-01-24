@@ -21,6 +21,12 @@ class Event
     /** @var string */
     protected $calendarId;
 
+    /** @var string */
+    protected $apiSecretToken;
+
+    /** @var string */
+    protected $userToken;
+
     /** @var array */
     protected $attendees;
 
@@ -36,12 +42,14 @@ class Event
      *
      * @return static
      */
-    public static function createFromGoogleCalendarEvent(Google_Service_Calendar_Event $googleEvent, $calendarId)
+    public static function createFromGoogleCalendarEvent(Google_Service_Calendar_Event $googleEvent, $calendarId,$apiSecretToken,$userToken)
     {
         $event = new static;
 
         $event->googleEvent = $googleEvent;
         $event->calendarId = $calendarId;
+        $event->apiSecretToken = $apiSecretToken;
+        $event->userToken = $userToken;
 
         return $event;
     }
@@ -52,11 +60,11 @@ class Event
      *
      * @return mixed
      */
-    public static function create(array $properties, string $calendarId = null, $optParams = [])
+    public static function create(array $properties, string $calendarId = null, $optParams = [],string $apiSecretToken=null,string $userToken=null)
     {
         $event = new static;
 
-        $event->calendarId = static::getGoogleCalendar($calendarId)->getCalendarId();
+        $event->calendarId = static::getGoogleCalendar($calendarId,$apiSecretToken,$userToken)->getCalendarId();
 
         foreach ($properties as $name => $value) {
             $event->$name = $value;
@@ -74,9 +82,9 @@ class Event
         return $event->quickSave($text);
     }
 
-    public static function get(CarbonInterface $startDateTime = null, CarbonInterface $endDateTime = null, array $queryParameters = [], string $calendarId = null): Collection
+    public static function get(CarbonInterface $startDateTime = null, CarbonInterface $endDateTime = null, array $queryParameters = [], string $calendarId = null,string $apiSecretToken,string $userToken ): Collection
     {
-        $googleCalendar = static::getGoogleCalendar($calendarId);
+        $googleCalendar = static::getGoogleCalendar($calendarId,$apiSecretToken,$userToken);
 
         $googleEvents = $googleCalendar->listEvents($startDateTime, $endDateTime, $queryParameters);
 
@@ -93,8 +101,8 @@ class Event
         $useUserOrder = isset($queryParameters['orderBy']);
 
         return collect($googleEventsList)
-            ->map(function (Google_Service_Calendar_Event $event) use ($calendarId) {
-                return static::createFromGoogleCalendarEvent($event, $calendarId);
+            ->map(function (Google_Service_Calendar_Event $event) use ($calendarId,$apiSecretToken,$userToken) {
+                return static::createFromGoogleCalendarEvent($event, $calendarId,$apiSecretToken,$userToken);
             })
             ->sortBy(function (self $event, $index) use ($useUserOrder) {
                 if ($useUserOrder) {
@@ -106,13 +114,13 @@ class Event
             ->values();
     }
 
-    public static function find($eventId, string $calendarId = null): self
+    public static function find($eventId, string $calendarId = null,string $apiSecretToken=null,string $userToken=null): self
     {
-        $googleCalendar = static::getGoogleCalendar($calendarId);
+        $googleCalendar = static::getGoogleCalendar($calendarId,$apiSecretToken,$userToken);
 
         $googleEvent = $googleCalendar->getEvent($eventId);
 
-        return static::createFromGoogleCalendarEvent($googleEvent, $calendarId);
+        return static::createFromGoogleCalendarEvent($googleEvent, $calendarId,$apiSecretToken,$userToken);
     }
 
     public function __get($name)
@@ -176,20 +184,20 @@ class Event
     {
         $method = $method ?? ($this->exists() ? 'updateEvent' : 'insertEvent');
 
-        $googleCalendar = $this->getGoogleCalendar($this->calendarId);
+        $googleCalendar = $this->getGoogleCalendar($this->calendarId,$this->apiSecretToken,$this->userToken);
 
         $googleEvent = $googleCalendar->$method($this, $optParams);
 
-        return static::createFromGoogleCalendarEvent($googleEvent, $googleCalendar->getCalendarId());
+        return static::createFromGoogleCalendarEvent($googleEvent, $googleCalendar->getCalendarId(),$googleCalendar->getApiSecretToken(),$googleCalendar->getUserToken());
     }
 
     public function quickSave(string $text): self
     {
-        $googleCalendar = $this->getGoogleCalendar($this->calendarId);
+        $googleCalendar = $this->getGoogleCalendar($this->calendarId,$this->apiSecretToken,$this->userToken);
 
         $googleEvent = $googleCalendar->insertEventFromText($text);
 
-        return static::createFromGoogleCalendarEvent($googleEvent, $googleCalendar->getCalendarId());
+        return static::createFromGoogleCalendarEvent($googleEvent, $googleCalendar->getCalendarId(),$googleCalendar->getApiSecretToken(),$googleCalendar->getUserToken());
     }
 
     public function update(array $attributes, $optParams = []): self
@@ -203,7 +211,7 @@ class Event
 
     public function delete(string $eventId = null, $optParams = [])
     {
-        $this->getGoogleCalendar($this->calendarId)->deleteEvent($eventId ?? $this->id, $optParams);
+        $this->getGoogleCalendar($this->calendarId,$this->apiSecretToken,$this->userToken)->deleteEvent($eventId ?? $this->id, $optParams);
     }
 
     public function addAttendee(array $attendee)
@@ -235,11 +243,21 @@ class Event
         return $this->calendarId;
     }
 
-    protected static function getGoogleCalendar(string $calendarId = null): GoogleCalendar
+    public function getApiSecretToken(): string
+    {
+        return $this->apiSecretToken;
+    }
+
+    public function getUserToken(): string
+    {
+        return $this->userToken;
+    }
+
+    protected static function getGoogleCalendar(string $calendarId = null,$apiSecretToken,$userToken): GoogleCalendar
     {
         $calendarId = $calendarId ?? config('google-calendar.calendar_id');
 
-        return GoogleCalendarFactory::createForCalendarId($calendarId);
+        return GoogleCalendarFactory::createForCalendarId($calendarId,$apiSecretToken,$userToken);
     }
 
     protected function setDateProperty(string $name, CarbonInterface $date)

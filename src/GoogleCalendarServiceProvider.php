@@ -20,10 +20,13 @@ class GoogleCalendarServiceProvider extends ServiceProvider
 
         $this->app->bind(GoogleCalendar::class, function () {
             $config = config('google-calendar');
+            $calendarId= session('google_calendar_id');
+            $apiSecretToken= session('google_api_secret_token');
+            $userToken= session('google_user_token');
 
             $this->guardAgainstInvalidConfiguration($config);
 
-            return GoogleCalendarFactory::createForCalendarId($config['calendar_id']);
+            return GoogleCalendarFactory::createForCalendarId($calendarId,$apiSecretToken,$userToken);
         });
 
         $this->app->alias(GoogleCalendar::class, 'laravel-google-calendar');
