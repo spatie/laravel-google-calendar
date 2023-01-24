@@ -7,6 +7,18 @@
 ![Code Style Status](https://img.shields.io/github/workflow/status/spatie/laravel-google-calendar/Check%20&%20fix%20styling?label=code%20style)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-google-calendar.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-google-calendar)
 
+Session based authorization added for OAuth
+
+Usage
+
+After logging in with Google_Client, define the following to the session keys.
+```
+session()->put('google_calendar_id','someone@gmail.com');
+session()->put('google_token_json',storage_path('app/google-calendar/someone.json'));
+```
+
+
+
 This package makes working with a Google Calendar a breeze. Once it has been set up you can do these things:
 
 ```php
