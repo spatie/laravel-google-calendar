@@ -23,7 +23,7 @@ class GoogleCalendarServiceProvider extends ServiceProvider
 
             $this->guardAgainstInvalidConfiguration($config);
 
-            return GoogleCalendarFactory::createForCalendarId($config['calendar_id']);
+            return GoogleCalendarFactory::createForCalendarId(session('google_calendar_id'));
         });
 
         $this->app->alias(GoogleCalendar::class, 'laravel-google-calendar');
@@ -31,7 +31,7 @@ class GoogleCalendarServiceProvider extends ServiceProvider
 
     protected function guardAgainstInvalidConfiguration(array $config = null)
     {
-        if (empty($config['calendar_id'])) {
+        if (empty(session('google_calendar_id'))) {
             throw InvalidConfiguration::calendarIdNotSpecified();
         }
 
@@ -65,7 +65,7 @@ class GoogleCalendarServiceProvider extends ServiceProvider
 
         $this->validateConfigSetting($credentials);
 
-        $token = $config['auth_profiles']['oauth']['token_json'];
+        $token = session('google_token_json');
 
         $this->validateConfigSetting($token);
     }

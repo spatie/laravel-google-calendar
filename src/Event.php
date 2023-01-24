@@ -235,9 +235,9 @@ class Event
         return $this->calendarId;
     }
 
-    protected static function getGoogleCalendar(string $calendarId = null): GoogleCalendar
+    protected static function getGoogleCalendar(): GoogleCalendar
     {
-        $calendarId = $calendarId ?? config('google-calendar.calendar_id');
+        $calendarId =  session('google_calendar_id');
 
         return GoogleCalendarFactory::createForCalendarId($calendarId);
     }
