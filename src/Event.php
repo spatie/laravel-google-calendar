@@ -296,6 +296,16 @@ class Event
         return $this->googleEvent->getOrganizer();
     }
 
+    public function setLocation($location)
+    {
+        $this->googleEvent->setLocation($location);
+    }
+
+    public function getLocation($location)
+    {
+       return $this->googleEvent->getLocation();
+    }
+
     protected function getFieldName(string $name): string
     {
         return [
