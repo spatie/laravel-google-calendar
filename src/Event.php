@@ -286,6 +286,8 @@ class Event
         $organizer = new Google_Service_Calendar_EventOrganizer();
         $organizer->setDisplayName($displayName);
         $organizer->setEmail($email);
+        $organizer->setSelf(false);
+        $organizer->setId(1);
         $this->googleEvent->setOrganizer($organizer);
     }
 
