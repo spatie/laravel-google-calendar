@@ -8,6 +8,7 @@ use DateTime;
 use Google_Service_Calendar_Event;
 use Google_Service_Calendar_EventAttendee;
 use Google_Service_Calendar_EventDateTime;
+use Google_Service_Calendar_EventOrganizer;
 use Google_Service_Calendar_EventSource;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -278,6 +279,19 @@ class Event
     public function setColorId(int $id)
     {
         $this->googleEvent->setColorId($id);
+    }
+
+    public function setOrganizer($displayName,$email)
+    {
+        $organizer = new Google_Service_Calendar_EventOrganizer();
+        $organizer->setDisplayName($displayName);
+        $organizer->setEmail($email);
+        $this->googleEvent->setOrganizer($organizer);
+    }
+
+    public function getOrganizer()
+    {
+        return $this->googleEvent->getOrganizer();
     }
 
     protected function getFieldName(string $name): string
