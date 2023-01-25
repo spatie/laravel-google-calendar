@@ -7,6 +7,7 @@ use Carbon\CarbonInterface;
 use DateTime;
 use Google_Service_Calendar_Event;
 use Google_Service_Calendar_EventAttendee;
+use Google_Service_Calendar_EventCreator;
 use Google_Service_Calendar_EventDateTime;
 use Google_Service_Calendar_EventOrganizer;
 use Google_Service_Calendar_EventSource;
@@ -301,9 +302,22 @@ class Event
         $this->googleEvent->setLocation($location);
     }
 
-    public function getLocation($location)
+    public function getLocation()
     {
        return $this->googleEvent->getLocation();
+    }
+
+    public function setCreator($displayName,$email)
+    {
+        $creator = new Google_Service_Calendar_EventCreator();
+        $creator->setDisplayName($displayName);
+        $creator->setEmail($email);
+        $this->googleEvent->setCreator($creator);
+    }
+
+    public function getCreator()
+    {
+        return $this->googleEvent->getCreator();
     }
 
     protected function getFieldName(string $name): string
