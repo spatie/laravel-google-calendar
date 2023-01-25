@@ -267,7 +267,7 @@ class Event
         }
     }
 
-    protected function setSourceProperty(array $value)
+    public function setSourceProperty(array $value)
     {
         $source = new Google_Service_Calendar_EventSource([
             'title' => $value['title'],
