@@ -149,6 +149,7 @@ class EventTest extends TestCase
         $this->event->addMeetLink();
 
         $this->assertNotNull($this->event->googleEvent->getConferenceData());
+        $this->assertEquals('hangoutsMeet', $this->event->googleEvent->getConferenceData()->getCreateRequest()->getConferenceSolutionKey()->getType());
     }
 
     /** @test */
