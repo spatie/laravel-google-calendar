@@ -144,6 +144,15 @@ class EventTest extends TestCase
     }
 
     /** @test */
+    public function it_can_set_a_meet_link()
+    {
+        $this->event->addMeetLink();
+
+        $this->assertNotNull($this->event->googleEvent->getConferenceData());
+        $this->assertEquals('hangoutsMeet', $this->event->googleEvent->getConferenceData()->getCreateRequest()->getConferenceSolutionKey()->getType());
+    }
+
+    /** @test */
     public function it_can_determine_if_an_event_is_an_all_day_event()
     {
         $event = new Event;

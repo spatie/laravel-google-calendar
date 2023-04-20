@@ -5,6 +5,9 @@ namespace Spatie\GoogleCalendar;
 use Carbon\Carbon;
 use Carbon\CarbonInterface;
 use DateTime;
+use Google_Service_Calendar_ConferenceData;
+use Google_Service_Calendar_ConferenceSolutionKey;
+use Google_Service_Calendar_CreateConferenceRequest;
 use Google_Service_Calendar_Event;
 use Google_Service_Calendar_EventAttendee;
 use Google_Service_Calendar_EventDateTime;
@@ -23,6 +26,9 @@ class Event
 
     /** @var array */
     protected $attendees;
+
+    /** @var boolean */
+    protected $hasMeetLink = false;
 
     public function __construct()
     {
@@ -178,6 +184,10 @@ class Event
 
         $googleCalendar = $this->getGoogleCalendar($this->calendarId);
 
+        if ($this->hasMeetLink) {
+            $optParams['conferenceDataVersion'] = 1;
+        }
+
         $googleEvent = $googleCalendar->$method($this, $optParams);
 
         return static::createFromGoogleCalendarEvent($googleEvent, $googleCalendar->getCalendarId());
@@ -215,6 +225,22 @@ class Event
         ]);
 
         $this->googleEvent->setAttendees($this->attendees);
+    }
+
+    public function addMeetLink()
+    {
+        $conferenceData = new Google_Service_Calendar_ConferenceData([
+            'createRequest' => new Google_Service_Calendar_CreateConferenceRequest([
+                'requestId' => Str::random(10),
+                'conferenceSolutionKey' => new Google_Service_Calendar_ConferenceSolutionKey([
+                    'type' => 'hangoutsMeet',
+                ]),
+            ]),
+        ]);
+
+        $this->googleEvent->setConferenceData($conferenceData);
+
+        $this->hasMeetLink = true;
     }
 
     public function getSortDate(): string
