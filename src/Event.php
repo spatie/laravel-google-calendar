@@ -27,7 +27,7 @@ class Event
     /** @var array */
     protected $attendees;
 
-    /** @var boolean */
+    /** @var bool */
     protected $hasMeetLink = false;
 
     public function __construct()
