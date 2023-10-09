@@ -21,6 +21,7 @@ $event->addAttendee([
     'email' => 'john@example.com',
     'name' => 'John Doe',
     'comment' => 'Lorum ipsum',
+    'responseStatus' => 'needsAction',
 ]);
 $event->addAttendee(['email' => 'anotherEmail@gmail.com']);
 $event->addMeetLink(); // optionally add a google meet link to the event
