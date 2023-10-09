@@ -222,6 +222,9 @@ class Event
             'email' => $attendee['email'],
             'comment' => $attendee['comment'] ?? null,
             'displayName' => $attendee['name'] ?? null,
+            'responseStatus' => $attendee['responseStatus'] ?? 'needsAction',
+            'organizer' => $attendee['organizer'] ?? false,
+            'self' => $attendee['self'] ?? false,
         ]);
 
         $this->googleEvent->setAttendees($this->attendees);
