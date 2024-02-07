@@ -262,6 +262,11 @@ class Event
         return $this->calendarId;
     }
 
+    public function setDescription($description)
+    {
+        $this->googleEvent->setDescription($description);
+    }
+
     protected static function getGoogleCalendar(string $calendarId = null): GoogleCalendar
     {
         $calendarId = $calendarId ?? config('google-calendar.calendar_id');
