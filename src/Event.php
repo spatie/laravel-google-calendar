@@ -332,6 +332,16 @@ class Event
         $this->googleEvent->setLocation($location);
     }
 
+    public function getStatus()
+    {
+        $this->googleEvent->getStatus();
+    }
+
+    public function setStatus($status)
+    {
+        $this->googleEvent->setStatus($status);
+    }
+
     protected function getFieldName(string $name): string
     {
         return [
