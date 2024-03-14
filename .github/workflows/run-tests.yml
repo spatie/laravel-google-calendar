@@ -1,71 +1,86 @@
 name: run-tests
 
-on: [push, pull_request]
+on:
+  - push
+  - pull_request
 
 jobs:
-    test:
-        runs-on: ${{ matrix.os }}
-        strategy:
-            fail-fast: false
-            matrix:
-                os: [ubuntu-latest]
-                php: [8.2, 8.1, 8.0, 7.4, 7.3, 7.2]
-                laravel: [9.*, 8.*, 6.*, 7.*, 10.*]
-                dependency-version: [prefer-stable]
-                include:
-                    -   laravel: 10.*
-                        testbench: 8.*
-                    -   laravel: 9.*
-                        testbench: 7.*
-                    -   laravel: 8.*
-                        testbench: 6.*
-                    -   laravel: 7.*
-                        testbench: 5.*
-                    -   laravel: 6.*
-                        testbench: 4.*
-                exclude:
-                    -   laravel: 10.*
-                        php: 8.0
-                    -   laravel: 10.*
-                        php: 7.4
-                    -   laravel: 10.*
-                        php: 7.3
-                    -   laravel: 10.*
-                        php: 7.2
-                    -   laravel: 6.*
-                        php: 8.2
-                    -   laravel: 7.*
-                        php: 8.2
-                    -   laravel: 6.*
-                        php: 8.1
-                    -   laravel: 7.*
-                        php: 8.1
-                    -   laravel: 8.*
-                        php: 7.2
-                    -   laravel: 9.*
-                        php: 7.4
-                    -   laravel: 9.*
-                        php: 7.3
-                    -   laravel: 9.*
-                        php: 7.2
+  test:
+    runs-on: ${{ matrix.os }}
 
-        name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }} - ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        php: [8.2, 8.1, 8.0, 7.4, 7.3, 7.2]
+        laravel: ['6.*', '7.*', '8.*', '9.*', '10.*', '11.*']
+        dependency-version: [prefer-stable]
+        include:
+          - laravel: 10.*
+            testbench: 8.*
+          - laravel: 9.*
+            testbench: 7.*
+          - laravel: 8.*
+            testbench: 6.*
+          - laravel: 7.*
+            testbench: 5.*
+          - laravel: 6.*
+            testbench: 4.*
+          - laravel: 11.*
+            testbench: 9.*
+        exclude:
+          - laravel: 10.*
+            php: 8.0
+          - laravel: 10.*
+            php: 7.4
+          - laravel: 10.*
+            php: 7.3
+          - laravel: 10.*
+            php: 7.2
+          - laravel: 6.*
+            php: 8.2
+          - laravel: 7.*
+            php: 8.2
+          - laravel: 6.*
+            php: 8.1
+          - laravel: 7.*
+            php: 8.1
+          - laravel: 8.*
+            php: 7.2
+          - laravel: 9.*
+            php: 7.4
+          - laravel: 9.*
+            php: 7.3
+          - laravel: 9.*
+            php: 7.2
+          - laravel: 11.*
+            php: 8.1
+          - laravel: 11.*
+            php: 8.0
+          - laravel: 11.*
+            php: 7.4
+          - laravel: 11.*
+            php: 7.3
+          - laravel: 11.*
+            php: 7.2
 
-        steps:
-            -   name: Checkout code
-                uses: actions/checkout@v2
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }} - ${{ matrix.os }}
 
-            -   name: Setup PHP
-                uses: shivammathur/setup-php@v2
-                with:
-                    php-version: ${{ matrix.php }}
-                    extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
-                    coverage: none
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-            -   name: Install dependencies
-                run: |
-                    composer require "laravel/framework:${{ matrix.laravel }}" "nesbot/carbon:^2.63" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-                    composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
+          coverage: none
 
-            -   name: Execute tests
-                run: vendor/bin/phpunit
+      - name: Install dependencies
+        run: |
+          composer require "laravel/framework:${{ matrix.laravel }}" "nesbot/carbon:^2.63" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+          composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
+
+      - name: Execute tests
+        run: vendor/bin/phpunit
