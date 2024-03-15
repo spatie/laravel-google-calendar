@@ -302,9 +302,44 @@ class Event
         $this->googleEvent->setSource($source);
     }
 
+    public function getColorId()
+    {
+        $this->googleEvent->getColorId();
+    }
+
     public function setColorId(int $id)
     {
         $this->googleEvent->setColorId($id);
+    }
+
+    public function getDescription()
+    {
+        $this->googleEvent->getDescription();
+    }
+
+    public function setDescription($description)
+    {
+        $this->googleEvent->setDescription($description);
+    }
+
+    public function getLocation()
+    {
+        $this->googleEvent->getLocation();
+    }
+
+    public function setLocation($location)
+    {
+        $this->googleEvent->setLocation($location);
+    }
+
+    public function getStatus()
+    {
+        $this->googleEvent->getStatus();
+    }
+
+    public function setStatus($status)
+    {
+        $this->googleEvent->setStatus($status);
     }
 
     protected function getFieldName(string $name): string
