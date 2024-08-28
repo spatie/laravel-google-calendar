@@ -216,6 +216,11 @@ class Event
         $this->getGoogleCalendar($this->calendarId)->deleteEvent($eventId ?? $this->id, $optParams);
     }
 
+    public function deleteAll(?string $eventId = null)
+    {
+        $this->getGoogleCalendar($this->calendarId)->deleteAll($eventId ?? $this->id);
+    }
+
     public function addAttendee(array $attendee)
     {
         $this->attendees[] = new Google_Service_Calendar_EventAttendee([
