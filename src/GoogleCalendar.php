@@ -101,6 +101,15 @@ class GoogleCalendar
         $this->calendarService->events->delete($this->calendarId, $eventId, $optParams);
     }
 
+    public function deleteAll($eventId, $optParams = [])
+    {
+        $instances = $this->calendarService->events->instances($this->calendarId, $eventId, $optParams);
+
+        foreach ($instances->getItems() as $instance) {
+            $this->deleteEvent($instance->getId(), $optParams);
+        }
+    }
+
     public function getService(): Google_Service_Calendar
     {
         return $this->calendarService;
