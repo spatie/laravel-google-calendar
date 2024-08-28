@@ -235,10 +235,7 @@ class Event
 
     public function addAttendees(array $attendees = []): void
     {
-        // $userModel = config('auth.providers.users.model');
-        // $users = $userModel::query()->whereIn('email', collect($attendees)->pluck('email'))->get();
         foreach ($attendees as $attendee) {
-            // $attendee['id'] = $users->firstWhere('email', $attendee['email'])->id;
             $this->addAttendee($attendee);
         }
     }
