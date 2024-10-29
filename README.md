@@ -10,7 +10,7 @@ This package makes working with a Google Calendar a breeze. Once it has been set
 ```php
 use Spatie\GoogleCalendar\Event;
 
-//create a new event
+// create a new event
 $event = new Event;
 
 $event->name = 'A new event';
@@ -74,7 +74,7 @@ php artisan vendor:publish --provider="Spatie\GoogleCalendar\GoogleCalendarServi
 ```
 
 This will publish a file called `google-calendar.php` in your config-directory with these contents:
-```
+```php
 return [
 
     'default_auth_profile' => env('GOOGLE_CALENDAR_AUTH_PROFILE', 'service_account'),
@@ -108,7 +108,7 @@ return [
     ],
 
     /*
-     *  The id of the Google Calendar that will be used by default.
+     * The id of the Google Calendar that will be used by default.
      */
     'calendar_id' => env('GOOGLE_CALENDAR_ID'),
 ];
@@ -285,7 +285,7 @@ $event->save();
 Alternatively, you can use the update method:
 
 ```php
-$event = Event::find($eventId)
+$event = Event::find($eventId);
 
 $event->update(['name' => 'My updated title']);
 ```
@@ -308,8 +308,8 @@ You can set source urls in your events, which are only visible to the creator of
 $yourEvent->source = [
    'title' => 'Test Source Title',
    'url' => 'http://testsource.url',
- ];
- ```
+];
+```
 
 ## Setting a color
 
