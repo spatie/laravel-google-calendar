@@ -74,7 +74,7 @@ php artisan vendor:publish --provider="Spatie\GoogleCalendar\GoogleCalendarServi
 ```
 
 This will publish a file called `google-calendar.php` in your config-directory with these contents:
-```
+```php
 return [
 
     'default_auth_profile' => env('GOOGLE_CALENDAR_AUTH_PROFILE', 'service_account'),
