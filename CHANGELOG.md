@@ -2,6 +2,21 @@
 
 All notable changes to `laravel-google-calendar` will be documented in this file
 
+## 3.8.1 - 2025-01-27
+
+### What's Changed
+
+* README updates by @JHWelch in https://github.com/spatie/laravel-google-calendar/pull/300
+* Update phpunit config by @JHWelch in https://github.com/spatie/laravel-google-calendar/pull/301
+* Adding null typing to solve php 8.4 depreciation. by @StefanoDucciConvenia in https://github.com/spatie/laravel-google-calendar/pull/303
+
+### New Contributors
+
+* @JHWelch made their first contribution in https://github.com/spatie/laravel-google-calendar/pull/300
+* @StefanoDucciConvenia made their first contribution in https://github.com/spatie/laravel-google-calendar/pull/303
+
+**Full Changelog**: https://github.com/spatie/laravel-google-calendar/compare/3.8.0...3.8.1
+
 ## 3.8.0 - 2024-03-14
 
 ### What's Changed
