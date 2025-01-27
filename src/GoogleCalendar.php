@@ -32,7 +32,7 @@ class GoogleCalendar
     /*
      * @link https://developers.google.com/google-apps/calendar/v3/reference/events/list
      */
-    public function listEvents(CarbonInterface $startDateTime = null, CarbonInterface $endDateTime = null, array $queryParameters = []): Google_Service_Calendar_Events
+    public function listEvents(?CarbonInterface $startDateTime = null, ?CarbonInterface $endDateTime = null, array $queryParameters = []): Google_Service_Calendar_Events
     {
         $parameters = [
             'singleEvents' => true,

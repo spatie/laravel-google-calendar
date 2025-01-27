@@ -58,7 +58,7 @@ class Event
      *
      * @return mixed
      */
-    public static function create(array $properties, string $calendarId = null, $optParams = [])
+    public static function create(array $properties, ?string $calendarId = null, $optParams = [])
     {
         $event = new static;
 
@@ -80,7 +80,7 @@ class Event
         return $event->quickSave($text);
     }
 
-    public static function get(CarbonInterface $startDateTime = null, CarbonInterface $endDateTime = null, array $queryParameters = [], string $calendarId = null): Collection
+    public static function get(?CarbonInterface $startDateTime = null, ?CarbonInterface $endDateTime = null, array $queryParameters = [], string $calendarId = null): Collection
     {
         $googleCalendar = static::getGoogleCalendar($calendarId);
 
@@ -112,7 +112,7 @@ class Event
             ->values();
     }
 
-    public static function find($eventId, string $calendarId = null): self
+    public static function find($eventId, ?string $calendarId = null): self
     {
         $googleCalendar = static::getGoogleCalendar($calendarId);
 
@@ -178,7 +178,7 @@ class Event
         return is_null($this->googleEvent['start']['dateTime']);
     }
 
-    public function save(string $method = null, $optParams = []): self
+    public function save(?string $method = null, $optParams = []): self
     {
         $method = $method ?? ($this->exists() ? 'updateEvent' : 'insertEvent');
 
@@ -211,7 +211,7 @@ class Event
         return $this->save('updateEvent', $optParams);
     }
 
-    public function delete(string $eventId = null, $optParams = [])
+    public function delete(?string $eventId = null, $optParams = [])
     {
         $this->getGoogleCalendar($this->calendarId)->deleteEvent($eventId ?? $this->id, $optParams);
     }
@@ -262,7 +262,7 @@ class Event
         return $this->calendarId;
     }
 
-    protected static function getGoogleCalendar(string $calendarId = null): GoogleCalendar
+    protected static function getGoogleCalendar(?string $calendarId = null): GoogleCalendar
     {
         $calendarId = $calendarId ?? config('google-calendar.calendar_id');
 
