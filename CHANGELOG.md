@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-google-calendar` will be documented in this file
 
+## 3.8.3 - 2025-02-21
+
+### What's Changed
+
+* Laravel 12.x Compatibility by @laravel-shift in https://github.com/spatie/laravel-google-calendar/pull/304
+
+**Full Changelog**: https://github.com/spatie/laravel-google-calendar/compare/3.8.2...3.8.3
+
 ## 3.8.2 - 2025-02-21
 
 **Full Changelog**: https://github.com/spatie/laravel-google-calendar/compare/3.8.1...3.8.2
