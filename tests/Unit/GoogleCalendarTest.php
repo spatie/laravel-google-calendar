@@ -4,9 +4,9 @@ namespace Spatie\GoogleCalendar\Tests\Unit;
 
 use Google_Service_Calendar;
 use Mockery;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Spatie\GoogleCalendar\GoogleCalendar;
-use PHPUnit\Framework\Attributes\Test;
 
 class GoogleCalendarTest extends TestCase
 {

@@ -5,9 +5,9 @@ namespace Spatie\GoogleCalendar\Tests\Integration;
 use Carbon\Carbon;
 use DateTime;
 use Mockery as m;
+use PHPUnit\Framework\Attributes\Test;
 use Spatie\GoogleCalendar\Event;
 use Spatie\GoogleCalendar\Tests\TestCase;
-use PHPUnit\Framework\Attributes\Test;
 
 class EventTest extends TestCase
 {
