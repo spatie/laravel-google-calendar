@@ -6,6 +6,7 @@ use Google_Service_Calendar;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 use Spatie\GoogleCalendar\GoogleCalendar;
+use PHPUnit\Framework\Attributes\Test;
 
 class GoogleCalendarTest extends TestCase
 {
@@ -29,7 +30,7 @@ class GoogleCalendarTest extends TestCase
         $this->googleCalendar = new GoogleCalendar($this->googleServiceCalendar, $this->calendarId);
     }
 
-    /** @test */
+    #[Test]
     public function it_provides_a_getter_for_calendarId()
     {
         $this->assertEquals($this->calendarId, $this->googleCalendar->getCalendarId());

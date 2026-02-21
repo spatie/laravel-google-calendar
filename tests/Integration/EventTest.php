@@ -7,6 +7,7 @@ use DateTime;
 use Mockery as m;
 use Spatie\GoogleCalendar\Event;
 use Spatie\GoogleCalendar\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class EventTest extends TestCase
 {
@@ -20,7 +21,7 @@ class EventTest extends TestCase
         $this->event = new Event;
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_a_start_date()
     {
         $now = Carbon::now();
@@ -32,7 +33,7 @@ class EventTest extends TestCase
         $this->assertEquals($now, $this->event->startDate);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_a_end_date()
     {
         $now = Carbon::now();
@@ -42,7 +43,7 @@ class EventTest extends TestCase
         $this->assertEquals($now->format('Y-m-d'), $this->event->googleEvent['end']['date']);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_a_start_date_time()
     {
         $now = Carbon::now();
@@ -52,7 +53,7 @@ class EventTest extends TestCase
         $this->assertEquals($now->format(DateTime::RFC3339), $this->event->googleEvent['start']['dateTime']);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_an_end_date_time()
     {
         $now = Carbon::now();
@@ -62,7 +63,7 @@ class EventTest extends TestCase
         $this->assertEquals($now->format(DateTime::RFC3339), $this->event->googleEvent['end']['dateTime']);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_determine_a_sort_date()
     {
         $now = Carbon::now();
@@ -76,7 +77,7 @@ class EventTest extends TestCase
         $this->assertEquals($now, $event->getSortDate());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_a_name()
     {
         $this->event->name = 'testname';
@@ -84,7 +85,7 @@ class EventTest extends TestCase
         $this->assertEquals('testname', $this->event->googleEvent['summary']);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_a_color()
     {
         $this->event->googleEvent->setColorId(11);
@@ -92,7 +93,7 @@ class EventTest extends TestCase
         $this->assertEquals(11, $this->event->googleEvent['colorId']);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_a_description()
     {
         $this->event->description = 'Test Description';
@@ -100,7 +101,7 @@ class EventTest extends TestCase
         $this->assertEquals('Test Description', $this->event->googleEvent['description']);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_a_location()
     {
         $this->event->location = 'Test Location';
@@ -108,7 +109,7 @@ class EventTest extends TestCase
         $this->assertEquals('Test Location', $this->event->googleEvent->getLocation());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_a_source()
     {
         $this->event->source = [
@@ -120,7 +121,7 @@ class EventTest extends TestCase
         $this->assertEquals('http://testsource.url', $this->event->googleEvent->getSource()->url);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_multiple_attendees()
     {
         $attendees = [
@@ -143,7 +144,7 @@ class EventTest extends TestCase
         $this->assertEquals($attendees[1]['email'], $this->event->googleEvent->getAttendees()[1]->getEmail());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_a_meet_link()
     {
         $this->event->addMeetLink();
@@ -152,7 +153,7 @@ class EventTest extends TestCase
         $this->assertEquals('hangoutsMeet', $this->event->googleEvent->getConferenceData()->getCreateRequest()->getConferenceSolutionKey()->getType());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_determine_if_an_event_is_an_all_day_event()
     {
         $event = new Event;
@@ -166,7 +167,7 @@ class EventTest extends TestCase
         $this->assertFalse($event->isAllDayEvent());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_create_an_event_based_on_a_text_string()
     {
         $event = m::mock(Event::class);
@@ -175,7 +176,7 @@ class EventTest extends TestCase
         $event->quickSave('Appointment at Somewhere on April 25 10am-10:25am');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_create_an_event_based_on_a_text_string_statically()
     {
         $event = m::mock(Event::class);
@@ -184,7 +185,7 @@ class EventTest extends TestCase
         $event::quickCreate('Appointment at Somewhere on April 25 10am-10:25am');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_a_timezone_that_is_a_string()
     {
         $now = Carbon::now()->setTimezone('Indian/Reunion');
