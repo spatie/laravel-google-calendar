@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: [8.5, 8.4, 8.3, 8.2]
+        php: [8.6, 8.5, 8.4, 8.3, 8.2]
         laravel: ['13.*', '12.*', '11.*', '10.*']
         stability: [prefer-stable]
         include:
@@ -26,6 +26,8 @@ jobs:
             php: 8.2
           - laravel: 10.*
             php: 8.5
+          - laravel: 10.*
+            php: 8.6
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }}
 
